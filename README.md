@@ -3,6 +3,8 @@
 
 ### Integrantes: 
 * Thiago Puyelli
+* Bautista Pereyra Buch
+* Enzo Federico Bianchi
 * Matias Herneder
 
 # Uso de los programas 
