@@ -6,4 +6,12 @@
 |                                  x|        ID|     FLOAT|                                  -|    |
 |                                msg|        ID|    STRING|                                  -|    |
 |                                _10| INT_CONST|          |                                 10|    |
-|                              _"20"|STRING_CONST|          |                               "20"|   4|
+|                                _20| INT_CONST|          |                                 20|    |
+|                               _123| INT_CONST|          |                                123|    |
+|                              _3.14|FLOAT_CONST|          |                               3.14|    |
+|                      _"Hola mundo"|STRING_CONST|          |                       "Hola mundo"|  12|
+|               _"a y b son iguales"|STRING_CONST|          |                "a y b son iguales"|  19|
+|                               _2.0|FLOAT_CONST|          |                                2.0|    |
+|   _"Condición compuesta verdadera"|STRING_CONST|          |    "Condición compuesta verdadera"|  31|
+|                                 _1| INT_CONST|          |                                  1|    |
+|                                _12| INT_CONST|          |                                 12|    |

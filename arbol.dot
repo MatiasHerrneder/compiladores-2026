@@ -1,0 +1,100 @@
+graph G {nodo_programa [label="Programa"]
+nodo_asig_142455398 [label=":= (a)"]
+nodo_programa -- nodo_asig_142455398
+nodo_cte_i_131679670 [label="CTE_I: 10"]
+nodo_asig_142455398 -- nodo_cte_i_131679670
+nodo_asig_624920126 [label=":= (b)"]
+nodo_programa -- nodo_asig_624920126
+nodo_cte_i_1364493742 [label="CTE_I: 20"]
+nodo_asig_624920126 -- nodo_cte_i_1364493742
+nodo_asig_878703456 [label=":= (c)"]
+nodo_programa -- nodo_asig_878703456
+nodo_cte_i_2045179048 [label="CTE_I: 123"]
+nodo_asig_878703456 -- nodo_cte_i_2045179048
+nodo_asig_540115932 [label=":= (x)"]
+nodo_programa -- nodo_asig_540115932
+nodo_cte_f_1430068097 [label="CTE_F: 3.14"]
+nodo_asig_540115932 -- nodo_cte_f_1430068097
+nodo_asig_1105230274 [label=":= (msg)"]
+nodo_programa -- nodo_asig_1105230274
+nodo_cte_str_1323854037 [label="CTE_STR: 'Hola mundo'"]
+nodo_asig_1105230274 -- nodo_cte_str_1323854037
+nodo_1617618909 [label="IF"]
+nodo_programa -- nodo_1617618909
+nodo_cond_2028522811 [label="=="]
+nodo_1617618909 -- nodo_cond_2028522811
+nodo_var_981767565 [label="Var: a"]
+nodo_cond_2028522811 -- nodo_var_981767565
+nodo_var_933752008 [label="Var: b"]
+nodo_cond_2028522811 -- nodo_var_933752008
+nodo_1176404126 [label="Then"]
+nodo_1617618909 -- nodo_1176404126
+nodo_show_1056646616 [label="SHOW"]
+nodo_1176404126 -- nodo_show_1056646616
+nodo_cte_str_541976439 [label="CTE_STR: 'a y b son iguales'"]
+nodo_show_1056646616 -- nodo_cte_str_541976439
+nodo_6774724 [label="Else"]
+nodo_1617618909 -- nodo_6774724
+nodo_show_233439525 [label="SHOW"]
+nodo_6774724 -- nodo_show_233439525
+nodo_iguales_1784164517 [label="#Iguales"]
+nodo_show_233439525 -- nodo_iguales_1784164517
+nodo_pivot_1784164517 [label="pivot"]
+nodo_iguales_1784164517 -- nodo_pivot_1784164517
+nodo_var_627119302 [label="Var: a"]
+nodo_pivot_1784164517 -- nodo_var_627119302
+nodo_lista_0_1784164517 [label="Lista 0"]
+nodo_iguales_1784164517 -- nodo_lista_0_1784164517
+nodo_var_697940526 [label="Var: b"]
+nodo_lista_0_1784164517 -- nodo_var_697940526
+nodo_var_1948742929 [label="Var: c"]
+nodo_lista_0_1784164517 -- nodo_var_1948742929
+nodo_1599192616 [label="IF"]
+nodo_programa -- nodo_1599192616
+nodo_cond_1924875808 [label="AND"]
+nodo_1599192616 -- nodo_cond_1924875808
+nodo_cond_370662035 [label="NOT"]
+nodo_cond_1924875808 -- nodo_cond_370662035
+nodo_cond_1507306173 [label="=="]
+nodo_cond_370662035 -- nodo_cond_1507306173
+nodo_var_187039569 [label="Var: a"]
+nodo_cond_1507306173 -- nodo_var_187039569
+nodo_var_596062803 [label="Var: b"]
+nodo_cond_1507306173 -- nodo_var_596062803
+nodo_cond_200062962 [label=">"]
+nodo_cond_1924875808 -- nodo_cond_200062962
+nodo_var_1871341168 [label="Var: x"]
+nodo_cond_200062962 -- nodo_var_1871341168
+nodo_cte_f_1265746855 [label="CTE_F: 2.0"]
+nodo_cond_200062962 -- nodo_cte_f_1265746855
+nodo_912041107 [label="Then"]
+nodo_1599192616 -- nodo_912041107
+nodo_show_1069747146 [label="SHOW"]
+nodo_912041107 -- nodo_show_1069747146
+nodo_cte_str_54936484 [label="CTE_STR: 'Condición compuesta verdadera'"]
+nodo_show_1069747146 -- nodo_cte_str_54936484
+nodo_repeat_1190118544 [label="REPEAT"]
+nodo_programa -- nodo_repeat_1190118544
+nodo_asig_1687875208 [label=":= (a)"]
+nodo_repeat_1190118544 -- nodo_asig_1687875208
+nodo_expbin_1134572682 [label="+"]
+nodo_asig_1687875208 -- nodo_expbin_1134572682
+nodo_var_1917453369 [label="Var: a"]
+nodo_expbin_1134572682 -- nodo_var_1917453369
+nodo_cte_i_1253676452 [label="CTE_I: 1"]
+nodo_expbin_1134572682 -- nodo_cte_i_1253676452
+nodo_show_2036649173 [label="SHOW"]
+nodo_repeat_1190118544 -- nodo_show_2036649173
+nodo_var_992129815 [label="Var: a"]
+nodo_show_2036649173 -- nodo_var_992129815
+nodo_cond_434832262 [label=">="]
+nodo_repeat_1190118544 -- nodo_cond_434832262
+nodo_var_536453546 [label="Var: a"]
+nodo_cond_434832262 -- nodo_var_536453546
+nodo_cte_i_1076151524 [label="CTE_I: 12"]
+nodo_cond_434832262 -- nodo_cte_i_1076151524
+nodo_show_1848667644 [label="SHOW"]
+nodo_programa -- nodo_show_1848667644
+nodo_var_797353103 [label="Var: msg"]
+nodo_show_1848667644 -- nodo_var_797353103
+}

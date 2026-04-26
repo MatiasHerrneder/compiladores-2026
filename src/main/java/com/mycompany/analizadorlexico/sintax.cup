@@ -4,10 +4,6 @@ import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.analizadorlexico.ast.*;
-/*
-parser Parser;
-symbols sym;
-*/
 
 /* ---------------- Codigo del parser ---------------- */
 parser code {:
@@ -19,28 +15,16 @@ parser code {:
     }
 
     public String tipoNumerico(String a, String b) {
-      if (a == null || b == null) return null;
-
-      if (a.equals("FLOAT") || b.equals("FLOAT")) return "FLOAT";
-      return "INT"; // HEX + INT + INT = INT
+        if (a == null || b == null) return null;
+        if (a.equals("FLOAT") || b.equals("FLOAT")) return "FLOAT";
+        return "INT";
     }
 
     public boolean tiposCompatibles(String var, String exp) {
-
         if (var == null || exp == null) return false;
-
-        // STRING solo acepta STRING
-        if (var.equals("STRING"))
-            return exp.equals("STRING");
-
-        // INT acepta INT o HEX o INT_CONST
-        if (var.equals("INT"))
-            return exp.equals("INT");
-
-        // FLOAT acepta FLOAT o INT
-        if (var.equals("FLOAT"))
-            return exp.equals("FLOAT") || exp.equals("INT");
-
+        if (var.equals("STRING")) return exp.equals("STRING");
+        if (var.equals("INT"))    return exp.equals("INT");
+        if (var.equals("FLOAT"))  return exp.equals("FLOAT") || exp.equals("INT");
         return false;
     }
 
@@ -54,66 +38,61 @@ parser code {:
     }
 :}
 
-action code
-{:
-:}
+action code {: :}
 
 /* ---------------------- TERMINALES ---------------------- */
 
 terminal REPEAT, UNTIL;
 terminal IF, THEN, ELSE, ENDIF;
-
 terminal DECVAR, ENDDECVAR;
 terminal PROGRAM_SECTION, END_PROGRAM_SECTION;
-
 terminal TYPE_INT, TYPE_FLOAT, TYPE_STRING;
-
 terminal SHOW;
-
 terminal EQ, NEQ, LE, GE, LT, GT;
 terminal AND, OR, NOT;
-
 terminal MAS, MENOS, MULT, DIV;
-
 terminal ASSIGN;
 terminal LBRACK, RBRACK, LPAREN, RPAREN, COMA;
-
 terminal FUNC_IGUALES;
-
 terminal ID;
 terminal INT_CONST, FLOAT_CONST, STRING_CONST, HEX_CONST;
 
 /* ---------------------- NO TERMINALES ---------------------- */
 
-non terminal NodoPrograma program;
-non terminal declaraciones, lista_declaraciones, declaracion;
-non terminal String tipo; 
-non terminal List<NodoIdentificador> lista_ids;
+non terminal NodoPrograma                           program;
+non terminal NodoDecVar                             declaraciones;
+non terminal ArrayList<NodoDeclaracion>             lista_declaraciones;
+non terminal NodoDeclaracion                        declaracion;
+non terminal String                                 tipo;
+non terminal ArrayList<String>                      lista_ids;
 
-non terminal List<NodoSentencia> sentencias;
-non terminal NodoSentencia sentencia;
+non terminal ArrayList<NodoSentencia>               sentencias;
+non terminal NodoSentencia                          sentencia;
+non terminal NodoAsignacion                         asignacion;
+non terminal NodoIf                                 seleccion;
+non terminal NodoRepeat                             iteracion;
+non terminal NodoShow                               escritura;
+non terminal NodoShow                               escritura_sin_var;
 
-non terminal NodoAsignacion asignacion;
-non terminal NodoIf seleccion;
-non terminal NodoCiclo iteracion;
-non terminal NodoEscritura escritura;
-non terminal NodoEscritura escritura_sin_var;
+non terminal NodoCondicion                          condicion;
+non terminal NodoCondicion                          comparacion;
+non terminal String                                 comparador;
 
-// non terminal condicion, condicion2, condicion3, comparacion, comparador;
-non terminal NodoExpresionBooleana condicion, comparacion, comparador;
+non terminal NodoExpresion                          expresion;
+non terminal NodoExpresion                          termino;
+non terminal NodoExpresion                          factor;
 
-non terminal NodoExpresion expresion, termino, factor;
-
-non terminal NodoIguales funcion_iguales;
+non terminal NodoIguales                            funcion_iguales;
+non terminal ArrayList<NodoExpresion>               lista_expresiones;
+non terminal ArrayList<ArrayList<NodoExpresion>>    listas_expresiones;
+non terminal ArrayList<NodoExpresion> lista_entre_corchetes;
 
 /* ----------------------- PRECEDENCIA ----------------------- */
 
 precedence left OR;
 precedence left AND;
-precedence left NOT;
-
+precedence right NOT;
 precedence left EQ, NEQ, LT, LE, GT, GE;
-
 precedence left MAS, MENOS;
 precedence left MULT, DIV;
 
@@ -124,270 +103,325 @@ start with program;
 /* ----------------------- GRAMATICA ----------------------- */
 
 program ::=
-      PROGRAM_SECTION declaraciones sentencias:s END_PROGRAM_SECTION {: 
-            RESULT = new NodoPrograma(s);
-            System.out.println("Regla 1 program: PROGRAM_SECTION declaraciones sentencias END_PROGRAM_SECTION"); 
-            System.out.println(RESULT);
-        :}
-      | escritura_sin_var {: System.out.println("Regla 2 program: escritura_sin_var"); :}
+      PROGRAM_SECTION declaraciones:d sentencias:s END_PROGRAM_SECTION
+      {:
+          System.out.println("Regla program");
+          RESULT = new NodoPrograma(d, s);
+      :}
+    | escritura_sin_var:e
+      {:
+          ArrayList<NodoSentencia> l = new ArrayList<>();
+          l.add(e);
+          RESULT = new NodoPrograma(null, l);
+      :}
     ;
 
 /* ------ Declaraciones ------ */
 
 declaraciones ::=
-      DECVAR lista_declaraciones ENDDECVAR {: System.out.println("Regla 1 declaraciones: DECVAR lista_declaraciones ENDDECVAR"); :}
+      DECVAR lista_declaraciones:l ENDDECVAR
+      {:
+          System.out.println("Regla declaraciones");
+          RESULT = new NodoDecVar(l);
+      :}
     | /* vacio */
+      {: RESULT = null; :}
     ;
 
 lista_declaraciones ::=
-      declaracion {: System.out.println("Regla 1 lista_declaraciones: declaracion"); :}
-    | lista_declaraciones declaracion {: System.out.println("Regla 2 lista_declaraciones: lista_declaraciones declaracion"); :}
+      declaracion:d
+      {:
+          ArrayList<NodoDeclaracion> l = new ArrayList<>();
+          l.add(d);
+          RESULT = l;
+      :}
+    | lista_declaraciones:l declaracion:d
+      {:
+          l.add(d);
+          RESULT = l;
+      :}
     ;
-
-// declaracion ::=
-//       tipo lista_ids {: System.out.println("Regla 1 declaracion: tipo lista_ids"); 
-//         scanner.symtbl.actualizarSimbolo();
-      
-//       :}
-//     ;
 
 declaracion ::=
-      tipo:$1 lista_ids:$2
-      {: 
-         System.out.println("Regla declaracion: tipo " + $1 + " lista_ids " + $2);
-
-         for (NodoIdentificador id : $2) {
-            scanner.symtbl.actualizarSimbolo(id.getDescripcionNodo(), $1);
-         }
-      :};
+      tipo:t lista_ids:ids
+      {:
+          System.out.println("Regla declaracion: " + t);
+          for (String id : ids) {
+              scanner.symtbl.actualizarSimbolo(id, t);
+          }
+          RESULT = new NodoDeclaracion(ids.get(0), t);
+      :}
+    ;
 
 tipo ::=
-      TYPE_INT {: System.out.println("Regla 1 tipo: TYPE_INT"); RESULT="INT"; :}
-    | TYPE_FLOAT {: System.out.println("Regla 2 tipo: TYPE_FLOAT"); RESULT="FLOAT"; :}
-    | TYPE_STRING {: System.out.println("Regla 3 tipo: TYPE_STRING"); RESULT="STRING"; :}
+      TYPE_INT   {: System.out.println("Regla tipo: INT");    RESULT = "INT";    :}
+    | TYPE_FLOAT {: System.out.println("Regla tipo: FLOAT");  RESULT = "FLOAT";  :}
+    | TYPE_STRING{: System.out.println("Regla tipo: STRING"); RESULT = "STRING"; :}
     ;
 
-// lista_ids ::=
-//       ID {: System.out.println("Regla 1 lista_ids: ID"); :}
-//     | lista_ids COMA ID {: System.out.println("Regla 2 lista_ids: lista_ids COMA ID"); :}
-//     ;
 lista_ids ::=
-      ID:$1
-        {: System.out.println("Regla 1 lista_ids: ID");
-            ArrayList<NodoIdentificador> l = new ArrayList<>();
-            l.add(new NodoIdentificador($1.toString()));
-            RESULT = l;
-        :}
-    | lista_ids:$1 COMA ID:$3
-        {: System.out.println("Regla 2 lista_ids: lista_ids COMA ID");
-            $1.add(new NodoIdentificador($3.toString()));
-            RESULT = $1;
-        :}
+      ID:id
+      {:
+          ArrayList<String> l = new ArrayList<>();
+          l.add(id.toString());
+          RESULT = l;
+      :}
+    | lista_ids:l COMA ID:id
+      {:
+          l.add(id.toString());
+          RESULT = l;
+      :}
     ;
-
 
 /* ------ Sentencias ------ */
 
 sentencias ::=
-      sentencia:s {:ArrayList<NodoSentencia> a = new ArrayList<NodoSentencia>();
-                             a.add(s);
-                             RESULT = a;
-                            System.out.println("crea y agrega sentencia");:}
-    | sentencias:ss sentencia:s {: 
-                ss.add(s);
-                RESULT = ss;
-                System.out.println("sentencia");:}
+      sentencia:s
+      {:
+          ArrayList<NodoSentencia> l = new ArrayList<>();
+          l.add(s);
+          RESULT = l;
+      :}
+    | sentencias:l sentencia:s
+      {:
+          l.add(s);
+          RESULT = l;
+      :}
     ;
 
 sentencia ::=
-      asignacion:sas {: RESULT = sas; System.out.println("Regla 1 sentencia: asignacion"); :}
-    | seleccion:sif {: RESULT = sif; System.out.println("Regla 2 sentencia: seleccion"); :}
-    | iteracion:sit {: RESULT = sit; System.out.println("Regla 3 sentencia: iteracion"); :}
-    | escritura:ses {: RESULT = ses; System.out.println("Regla 4 sentencia: escritura"); :}
+      asignacion:s {: System.out.println("Regla sentencia: asignacion"); RESULT = s; :}
+    | seleccion:s  {: System.out.println("Regla sentencia: seleccion");  RESULT = s; :}
+    | iteracion:s  {: System.out.println("Regla sentencia: iteracion");  RESULT = s; :}
+    | escritura:s  {: System.out.println("Regla sentencia: escritura");  RESULT = s; :}
     ;
 
 /* ------ Asignacion ------ */
+/* Acepta tanto = como := segun el terminal ASSIGN del lexer */
 
 asignacion ::=
-      ID:$1 ASSIGN expresion:$3
+      ID:id ASSIGN expresion:e
       {:
-          System.out.println("Regla asignacion: " + $1 + " = expresion");
-
-          // Tipo de la variable
-          String tipoVar = scanner.symtbl.getTipo($1.toString());
-
-          // Tipo de la expresion
-          String tipoExp = $3.getDescripcionNodo();
-          System.out.println("TipoVar " + tipoVar + " TipoExp " + tipoExp);
-
-          // Control de error semantico
+          System.out.println("Regla asignacion: " + id);
+          String tipoVar = scanner.symtbl.getTipo(id.toString());
+          String tipoExp = e.getTipoSemantico(); // ← este cambio
           if (!tiposCompatibles(tipoVar, tipoExp)) {
               System.out.println(
-                  "ERROR SEMANTICO: No se puede asignar un valor de tipo " 
-                  + tipoExp + " a la variable " + $1 + " de tipo " + tipoVar
+                  "ERROR SEMANTICO: no se puede asignar tipo " +
+                  tipoExp + " a variable " + id + " de tipo " + tipoVar
               );
               throw new RuntimeException("Error semantico en asignacion.");
           }
+          RESULT = new NodoAsignacion(id.toString(), e);
       :}
     ;
-//
-//asignacion ::=
-//      ID:$1 ASSIGN expresion:$3
-//      {:
-//          System.out.println("Regla asignacion: " + $1);
-//          String tipoVar = scanner.symtbl.getTipo($1.toString());
-//          String tipoExp = $3.getTipo(); // el nodo ya sabe su tipo
-//          if (!tiposCompatibles(tipoVar, tipoExp)) {
-//              System.out.println("ERROR SEMANTICO: tipo " + tipoExp + " incompatible con " + tipoVar);
-//              throw new RuntimeException("Error semantico en asignacion.");
-//          }
-//          RESULT = new NodoAsignacion($1.toString(), $3);
-//      :}
-//    ;
 
 /* ------ Seleccion (IF) ------ */
 
 seleccion ::=
-      IF condicion THEN sentencias ELSE sentencias ENDIF {: System.out.println("Regla 1 seleccion: IF condicion THEN sentencias ELSE sentencias ENDIF"); :}
-    | IF condicion THEN sentencias ENDIF {: System.out.println("Regla 2 seleccion: IF condicion THEN sentencias ENDIF"); :}
+      IF condicion:c THEN sentencias:st ELSE sentencias:se ENDIF
+      {:
+          System.out.println("Regla seleccion: IF-THEN-ELSE");
+          RESULT = new NodoIf(c, st, se);
+      :}
+    | IF condicion:c THEN sentencias:st ENDIF
+      {:
+          System.out.println("Regla seleccion: IF-THEN");
+          RESULT = new NodoIf(c, st, null);
+      :}
     ;
-
-// seleccion ::=
-//      IF condicion:$2 THEN sentencias:$4 ELSE sentencias:$6 ENDIF
-//      {:
-//          RESULT = new NodoIf($2, $4, $6);
-//      :}
-//    | IF condicion:$2 THEN sentencias:$4 ENDIF
-//      {:
-//          RESULT = new NodoIf($2, $4, null);
-//      :}
-//    ;
 
 /* ------ Iteracion (REPEAT) ------ */
 
 iteracion ::=
-      REPEAT sentencias UNTIL condicion {: System.out.println("Regla 1 iteracion: REPEAT sentencias UNTIL condicion"); :}
+      REPEAT sentencias:s UNTIL condicion:c
+      {:
+          System.out.println("Regla iteracion: REPEAT-UNTIL");
+          RESULT = new NodoRepeat(s, c);
+      :}
     ;
 
 /* ------ Escritura ------ */
 
-
-
-//desdoblar show en constante int, float, id, string
 escritura ::=
-      SHOW expresion:$1 {: RESULT = new NodoEscritura($1.getDescripcionNodo()); System.out.println("Regla 1 escritura: SHOW expresion"); :} 
+      SHOW expresion:e
+      {:
+          System.out.println("Regla escritura: SHOW");
+          RESULT = new NodoShow(e);
+      :}
     ;
 
+/* escritura_sin_var: para cuando el programa es solo un show sin declaraciones */
 escritura_sin_var ::=
-      SHOW STRING_CONST:$1   {:RESULT = new NodoEscritura($1.toString()); System.out.println("Regla 1 escritura_sin_var: SHOW STRING_CONST"); :}
-      | SHOW INT_CONST:$2    {:RESULT = new NodoEscritura($2.toString()); System.out.println("Regla 2 escritura_sin_var: SHOW INT_CONST"); :}
-      | SHOW FLOAT_CONST:$3  {:RESULT = new NodoEscritura($3.toString()); System.out.println("Regla 3 escritura_sin_var: SHOW FLOAT_CONST"); :}
+      SHOW STRING_CONST:v
+      {:
+          System.out.println("Regla escritura_sin_var: SHOW STRING_CONST");
+          RESULT = new NodoShow(new NodoConstanteString(v.toString()));
+      :}
+    | SHOW INT_CONST:v
+      {:
+          System.out.println("Regla escritura_sin_var: SHOW INT_CONST");
+          RESULT = new NodoShow(new NodoConstanteInt(Integer.parseInt(v.toString())));
+      :}
+    | SHOW FLOAT_CONST:v
+      {:
+          System.out.println("Regla escritura_sin_var: SHOW FLOAT_CONST");
+          RESULT = new NodoShow(new NodoConstanteFloat(Float.parseFloat(v.toString())));
+      :}
     ;
 
 /* ------ Condicion ------ */
 
-// condicion ::=
-//       condicion OR condicion2 {:System.out.println("Regla 1 condicion: condicion OR condicion2");:}
-//     | condicion2 {:System.out.println("Regla 2 condicion: condicion2");:}
-//     ;
-
-// condicion2 ::=
-//       condicion2 AND condicion3 {:System.out.println("Regla 3 condicion: condicion2 AND condicion3");:}
-//     | condicion3 {:System.out.println("Regla 4 condicion: condicion3");:}
-//     ;
-
-// condicion3 ::=
-//       NOT condicion3 {:System.out.println("Regla 5 condicion: NOT condicion3");:}
-//     | LPAREN condicion RPAREN {:System.out.println("Regla 6 condicion: LPAREN condicion RPAREN");:}
-//     | comparacion {:System.out.println("Regla 7 condicion: comparacion");:}
-//     ;
-
-
 condicion ::=
-        comparacion {: System.out.println("Regla 1 condicion: comparacion"); :}
-      | comparacion AND comparacion {: System.out.println("Regla 2 condicion: comparacion AND comparacion"); :}
-      | comparacion OR comparacion  {: System.out.println("Regla 3 condicion: comparacion OR comparacion"); :}
-      | condicion AND condicion {: System.out.println("Regla 4 condicion: condicion AND condicion"); :}
-      | condicion OR condicion  {: System.out.println("Regla 5 condicion: condicion OR condicion"); :}
-      | NOT condicion {: System.out.println("Regla 6 condicion: NOT condicion"); :}
-      | LPAREN condicion RPAREN {:System.out.println("Regla 7 condicion: LPAREN condicion RPAREN");:}
+      comparacion:c
+      {: RESULT = c; :}
+
+    | condicion:c1 AND condicion:c2
+      {:
+          System.out.println("Regla condicion: AND");
+          RESULT = new NodoCondicion("AND", c1, c2);
+      :}
+
+    | condicion:c1 OR condicion:c2
+      {:
+          System.out.println("Regla condicion: OR");
+          RESULT = new NodoCondicion("OR", c1, c2);
+      :}
+
+    | NOT condicion:c
+      {:
+          System.out.println("Regla condicion: NOT");
+          RESULT = new NodoCondicion("NOT", c);
+      :}
+
+    | LPAREN condicion:c RPAREN
+      {: RESULT = c; :}
     ;
 
 comparacion ::=
-      expresion comparador expresion {: System.out.println("Regla 1 comparacion: expresion comparador expresion"); :}
+      expresion:e1 comparador:op expresion:e2
+      {:
+          System.out.println("Regla comparacion: " + op);
+          RESULT = new NodoCondicion(e1, op, e2);
+      :}
     ;
 
+/* CORREGIDO: cada rama retorna RESULT con el operador como String */
 comparador ::=
-        EQ  {: System.out.println("Regla 1 comparador EQ: EQ"); :}
-      | NEQ {: System.out.println("Regla 2 comparador NEQ: NEQ"); :}
-      | LT  {: System.out.println("Regla 3 comparador LT: LT"); :}
-      | LE  {: System.out.println("Regla 4 comparador LE: LE"); :}
-      | GT  {: System.out.println("Regla 5 comparador GT: GT"); :}
-      | GE  {: System.out.println("Regla 6 comparador GE: GE"); :}
+      EQ  {: RESULT = "=="; System.out.println("Regla comparador: =="); :}
+    | NEQ {: RESULT = "!="; System.out.println("Regla comparador: !="); :}
+    | LT  {: RESULT = "<";  System.out.println("Regla comparador: <");  :}
+    | LE  {: RESULT = "<="; System.out.println("Regla comparador: <="); :}
+    | GT  {: RESULT = ">";  System.out.println("Regla comparador: >");  :}
+    | GE  {: RESULT = ">="; System.out.println("Regla comparador: >="); :}
     ;
 
 /* ------ Expresiones ------ */
 
-//   expresion MAS termino {: System.out.println("Regla 1 expresion: expresion MAS termino"); :}
-// | expresion MENOS termino {: System.out.println("Regla 2 expresion: expresion MENOS termino"); :}
 expresion ::=
-      termino:$1
-        {: RESULT = $1; :}
-    | STRING_CONST:$2
-        {: RESULT = new NodoConstanteString($2.toString()); :}
+      termino:t
+      {: RESULT = t; :}
+    | STRING_CONST:v
+      {: RESULT = new NodoConstanteString(v.toString()); :}
     ;
 
 termino ::=
-      factor:$1
-      {: RESULT = $1; :}
-    | termino:$1 MAS factor:$3
-      {: RESULT = new NodoExpresionBinaria("+", $1, $3); :}
-    | termino:$1 MENOS factor:$3
-      {: RESULT = new NodoExpresionBinaria("-", $1, $3); :}
-    | termino:$1 MULT factor:$3
-      {: RESULT = new NodoExpresionBinaria("*", $1, $3); :}
-    | termino:$1 DIV factor:$3
-      {: RESULT = new NodoExpresionBinaria("/", $1, $3); :}
+      factor:f
+      {: RESULT = f; :}
+    | termino:t MAS factor:f
+      {: RESULT = new NodoExpresionBinaria(t, "+", f); :}
+    | termino:t MENOS factor:f
+      {: RESULT = new NodoExpresionBinaria(t, "-", f); :}
+    | termino:t MULT factor:f
+      {: RESULT = new NodoExpresionBinaria(t, "*", f); :}
+    | termino:t DIV factor:f
+      {: RESULT = new NodoExpresionBinaria(t, "/", f); :}
     ;
 
 factor ::=
-      ID:$1 
+    ID:id
         {:
-            System.out.println("Regla factor: ID");
-            System.out.println("66666 Valor de ID NodoIdentificador " + scanner.symtbl.getTipo($1.toString()));
-            RESULT = new NodoIdentificador(scanner.symtbl.getTipo($1.toString()));
+            System.out.println("Regla factor: ID " + id);
+            NodoVariable nv = new NodoVariable(id.toString());
+            nv.setTipoSemantico(scanner.symtbl.getTipo(id.toString()));
+            RESULT = nv;
         :}
-    | INT_CONST:$2
-        {:
-            System.out.println("Regla factor: INT_CONST");
-            RESULT = new NodoConstanteInt(Integer.parseInt($2.toString()));
-        :}
-    | FLOAT_CONST:$3
-        {:
-            System.out.println("Regla factor: FLOAT_CONST");
-            RESULT = new NodoConstanteFloat(Float.parseFloat($3.toString()));
-        :}
-    | HEX_CONST:$4
-        {:
-            System.out.println("Regla factor: HEX_CONST");
-            RESULT = new NodoConstanteHex(Integer.parseInt($4.toString()));
-        :}
-    | LPAREN expresion:$5 RPAREN
-        {:
-            RESULT = $5;
-        :}
-    | funcion_iguales:$6
-        {: 
-          System.out.println("Regla 5 factor: funcion_iguales"); 
-          RESULT = $6;
-        :}
+    | INT_CONST:v
+      {:
+          System.out.println("Regla factor: INT_CONST");
+          RESULT = new NodoConstanteInt(Integer.parseInt(v.toString()));
+      :}
+    | FLOAT_CONST:v
+      {:
+          System.out.println("Regla factor: FLOAT_CONST");
+          RESULT = new NodoConstanteFloat(Float.parseFloat(v.toString()));
+      :}
+    | HEX_CONST:v
+      {:
+          System.out.println("Regla factor: HEX_CONST");
+          String hex = v.toString().substring(2); // saca el "0h"
+          int decimal = Integer.parseInt(hex, 16);
+          RESULT = new NodoConstanteHex(hex, decimal);
+      :}
+    | LPAREN expresion:e RPAREN
+      {:
+          RESULT = e;
+      :}
+    | funcion_iguales:fi
+      {:
+          System.out.println("Regla factor: funcion_iguales");
+          RESULT = fi;
+      :}
     ;
 
 /* ------ Funcion especial #Iguales(...) ------ */
 
 funcion_iguales ::=
-      FUNC_IGUALES LPAREN expresion:$1 COMA LBRACK lista_ids:$2 RBRACK RPAREN {: 
-        System.out.println("Regla 1 funcion_iguales: FUNC_IGUALES LPAREN expresion COMA LBRACK lista_ids RBRACK RPAREN"); 
-        RESULT = new NodoIguales($1, $2);
+      FUNC_IGUALES LPAREN expresion:pivot COMA listas_expresiones:listas RPAREN
+      {:
+          System.out.println("Regla funcion_iguales: #Iguales");
+          RESULT = new NodoIguales(pivot, listas);
+      :}
+    ;
+
+/* Una lista entre corchetes: puede ser vacía o con expresiones */
+lista_entre_corchetes ::=
+      LBRACK RBRACK
+      {:
+          RESULT = new ArrayList<NodoExpresion>();
+      :}
+    | LBRACK lista_expresiones:l RBRACK
+      {:
+          RESULT = l;
+      :}
+    ;
+
+/* Secuencia de una o más listas entre corchetes separadas por coma */
+listas_expresiones ::=
+      lista_entre_corchetes:l
+      {:
+          ArrayList<ArrayList<NodoExpresion>> acc = new ArrayList<>();
+          acc.add(l);
+          RESULT = acc;
+      :}
+    | listas_expresiones:acc COMA lista_entre_corchetes:l
+      {:
+          acc.add(l);
+          RESULT = acc;
+      :}
+    ;
+
+/* Lista de expresiones separadas por coma, una o más */
+lista_expresiones ::=
+      expresion:e
+      {:
+          ArrayList<NodoExpresion> l = new ArrayList<>();
+          l.add(e);
+          RESULT = l;
+      :}
+    | lista_expresiones:l COMA expresion:e
+      {:
+          l.add(e);
+          RESULT = l;
       :}
     ;

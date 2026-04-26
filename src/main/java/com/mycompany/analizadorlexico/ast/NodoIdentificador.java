@@ -9,6 +9,11 @@ public class NodoIdentificador extends NodoExpresion {
     }
 
     @Override
+    public String getTipoSemantico() {
+        return "ID";
+    }
+
+    @Override
     public String getDescripcionNodo() {
         return "ID: " + identificador;
     }

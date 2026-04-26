@@ -1,15 +1,30 @@
 package com.mycompany.analizadorlexico.ast;
 
 public class NodoConstanteHex extends NodoExpresion {
-    private final int valor;
+    private final String valorHex;   // ej: "F3A"
+    private final int valorDecimal;  // ej: 3898
 
-    public NodoConstanteHex(int valor) {
-        super("CTE");
-        this.valor = valor;
+    public NodoConstanteHex(String valorHex, int valorDecimal) {
+        super("HEX");
+        this.valorHex = valorHex;
+        this.valorDecimal = valorDecimal;
     }
 
+    public String getValorHex() { return valorHex; }
+    
+    public int getValorDecimal() { return valorDecimal; }
+
     @Override
-    public String getDescripcionNodo() {
-        return "CTE: " + Integer.toString(valor);
+    public String getTipoSemantico() { return "INT"; }
+
+    @Override
+    protected String graficar(String idPadre) {
+        final String miId = "nodo_cte_hex_" + System.identityHashCode(this);
+        StringBuilder resultado = new StringBuilder();
+        resultado.append(miId + " [label=\"HEX: 0h" + valorHex + " (" + valorDecimal + ")\"]\n");
+        if (idPadre != null) {
+            resultado.append(idPadre + " -- " + miId + "\n");
+        }
+        return resultado.toString();
     }
 }

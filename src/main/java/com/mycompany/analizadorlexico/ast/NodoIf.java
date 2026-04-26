@@ -3,11 +3,13 @@ package com.mycompany.analizadorlexico.ast;
 import java.util.List;
 
 public class NodoIf extends NodoSentencia {
-    private final NodoExpresionBooleana condicion;
+    private final NodoCondicion condicion;
     private final List<NodoSentencia> sentenciasThen;
-    private final List<NodoSentencia> sentenciasElse;
+    private final List<NodoSentencia> sentenciasElse; // puede ser null
 
-    public NodoIf(NodoExpresionBooleana condicion, List<NodoSentencia> sentenciasThen, List<NodoSentencia> sentenciasElse) {
+    public NodoIf(NodoCondicion condicion,
+                  List<NodoSentencia> sentenciasThen,
+                  List<NodoSentencia> sentenciasElse) {
         super("IF");
         this.condicion = condicion;
         this.sentenciasThen = sentenciasThen;

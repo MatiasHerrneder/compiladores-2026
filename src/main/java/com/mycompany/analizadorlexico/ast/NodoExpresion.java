@@ -1,8 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
-public class NodoExpresion extends Nodo {
-
-    public NodoExpresion(String nombre) {
-        super(nombre);
+public abstract class NodoExpresion extends Nodo {
+    public NodoExpresion(String tipo) {
+        super(tipo);
     }
+    
+    public abstract String getTipoSemantico();
 }

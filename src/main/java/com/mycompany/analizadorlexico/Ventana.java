@@ -7,8 +7,11 @@ package com.mycompany.analizadorlexico;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JFileChooser;
+
 import javax.swing.*;
+
+import com.mycompany.analizadorlexico.ast.NodoPrograma;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +30,21 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
+        
+        // Botón para mostrar el árbol (agregado manualmente)
+        JButton btnArbol = new JButton("VER ÁRBOL");
+        btnArbol.addActionListener(e -> {
+            java.io.File png = new java.io.File("arbol.png");
+            if (png.exists()) {
+                mostrarArbol("arbol.png");
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Primero compilá un programa.",
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        jPanel1.add(btnArbol);
+
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -196,10 +214,35 @@ public class Ventana extends javax.swing.JFrame {
             parser p = new parser(lexico);
 
             try {
-                p.parse();
+                java_cup.runtime.Symbol resultado = p.parse();
+                NodoPrograma arbol = (NodoPrograma) resultado.value;
+
+                if (arbol != null) {
+                    String dot = arbol.graficar();
+                    mostrarTextoEnVentana("Árbol Sintáctico (DOT)", dot);
+                }
+
+                if (arbol != null) {
+                    String dot = arbol.graficar();
+
+                    // Guardar el .dot
+                    java.nio.file.Files.write(
+                        java.nio.file.Path.of("arbol.dot"),
+                        dot.getBytes()
+                    );
+
+                    // Renderizar con Graphviz a PNG
+                    Process proc = Runtime.getRuntime().exec(
+                        new String[]{"dot", "-Tpng", "arbol.dot", "-o", "arbol.png"}
+                    );
+                    proc.waitFor();
+
+                    // Mostrar en ventana
+                    mostrarArbol("arbol.png");
+                }
+
             } catch (Exception e) {
-                // El stacktrace ahora también se verá en el TextArea
-                // e.printStackTrace();
+                System.out.println("Error en el análisis: " + e.getMessage());
             }
 
         } catch (Error e) {
@@ -247,6 +290,7 @@ public class Ventana extends javax.swing.JFrame {
         area.setWrapStyleWord(true);
         area.setText(texto);
 
+
         JScrollPane scroll = new JScrollPane(area);
         scroll.setPreferredSize(new Dimension(1000, 500));
 
@@ -265,6 +309,28 @@ public class Ventana extends javax.swing.JFrame {
         frame.setVisible(true);
     }
     
+    private void mostrarArbol(String rutaPng) {
+        java.io.File archivo = new java.io.File(rutaPng);
+        if (!archivo.exists()) {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo generar el árbol.\n¿Tenés Graphviz instalado?",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ImageIcon icon = new ImageIcon(rutaPng);
+        JLabel label = new JLabel(icon);
+        JScrollPane scroll = new JScrollPane(label);
+        scroll.setPreferredSize(new Dimension(900, 600));
+
+        JFrame frame = new JFrame("Árbol Sintáctico");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(scroll, BorderLayout.CENTER);
+        frame.pack();
+        frame.setLocationRelativeTo(this);
+        frame.setVisible(true);
+    }
+
     /**
      * @param args the command line arguments
      */

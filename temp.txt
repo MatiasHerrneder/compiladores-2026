@@ -1,5 +1,3 @@
-// Programa de ejemplo en tu lenguaje
-
 PROGRAM.SECTION
 
 /* Declaraciones de variables */
@@ -11,8 +9,8 @@ ENDDECVAR
 
 // Inicializaciones / asignaciones
 a = 10
-b = "20"
-c = 0hFF        // constante hexadecimal (255)
+b = 20
+c = 123
 x = 3.14
 msg = "Hola mundo"
 
