@@ -26,6 +26,9 @@ public class NodoPrograma extends Nodo {
         resultado.append("graph G {");
 
         resultado.append(miId + " [label=\"Programa\"]\n");
+        
+        resultado.append(decVar.graficar(miId));
+
         for (NodoSentencia sentencia : this.sentencias) {
             resultado.append(sentencia.graficar(miId));
         }

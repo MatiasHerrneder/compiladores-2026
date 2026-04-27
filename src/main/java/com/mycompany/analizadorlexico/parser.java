@@ -490,7 +490,7 @@ class CUP$parser$actions {
           for (String id : ids) {
               scanner.symtbl.actualizarSimbolo(id, t);
           }
-          RESULT = new NodoDeclaracion(ids.get(0), t);
+          RESULT = new NodoDeclaracion(ids, t);
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("declaracion",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -652,7 +652,7 @@ class CUP$parser$actions {
 		
           System.out.println("Regla asignacion: " + id);
           String tipoVar = scanner.symtbl.getTipo(id.toString());
-          String tipoExp = e.getTipoSemantico(); // ← este cambio
+          String tipoExp = e.getTipoSemantico();
           if (!tiposCompatibles(tipoVar, tipoExp)) {
               System.out.println(
                   "ERROR SEMANTICO: no se puede asignar tipo " +

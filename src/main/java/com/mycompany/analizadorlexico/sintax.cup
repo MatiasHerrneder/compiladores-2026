@@ -91,7 +91,7 @@ non terminal ArrayList<NodoExpresion> lista_entre_corchetes;
 
 precedence left OR;
 precedence left AND;
-precedence right NOT;
+precedence left NOT;
 precedence left EQ, NEQ, LT, LE, GT, GE;
 precedence left MAS, MENOS;
 precedence left MULT, DIV;
@@ -149,7 +149,7 @@ declaracion ::=
           for (String id : ids) {
               scanner.symtbl.actualizarSimbolo(id, t);
           }
-          RESULT = new NodoDeclaracion(ids.get(0), t);
+          RESULT = new NodoDeclaracion(ids, t);
       :}
     ;
 
@@ -197,14 +197,13 @@ sentencia ::=
     ;
 
 /* ------ Asignacion ------ */
-/* Acepta tanto = como := segun el terminal ASSIGN del lexer */
 
 asignacion ::=
       ID:id ASSIGN expresion:e
       {:
           System.out.println("Regla asignacion: " + id);
           String tipoVar = scanner.symtbl.getTipo(id.toString());
-          String tipoExp = e.getTipoSemantico(); // ← este cambio
+          String tipoExp = e.getTipoSemantico();
           if (!tiposCompatibles(tipoVar, tipoExp)) {
               System.out.println(
                   "ERROR SEMANTICO: no se puede asignar tipo " +
@@ -251,7 +250,6 @@ escritura ::=
       :}
     ;
 
-/* escritura_sin_var: para cuando el programa es solo un show sin declaraciones */
 escritura_sin_var ::=
       SHOW STRING_CONST:v
       {:
@@ -306,7 +304,6 @@ comparacion ::=
       :}
     ;
 
-/* CORREGIDO: cada rama retorna RESULT con el operador como String */
 comparador ::=
       EQ  {: RESULT = "=="; System.out.println("Regla comparador: =="); :}
     | NEQ {: RESULT = "!="; System.out.println("Regla comparador: !="); :}
