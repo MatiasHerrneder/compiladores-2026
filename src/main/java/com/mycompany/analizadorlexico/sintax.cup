@@ -211,7 +211,7 @@ asignacion ::=
               );
               throw new RuntimeException("Error semantico en asignacion.");
           }
-          RESULT = new NodoAsignacion(id.toString(), e);
+          RESULT = new NodoAsignacion(new NodoVariable(id.toString()), e);
       :}
     ;
 

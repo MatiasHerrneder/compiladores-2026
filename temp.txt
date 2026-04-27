@@ -2,38 +2,17 @@ PROGRAM.SECTION
 
 /* Declaraciones de variables */
 DECVAR
-  INT a, b, c
-  FLOAT x
-  STRING msg
+  INT a, b, w, x, e, f
 ENDDECVAR
 
 // Inicializaciones / asignaciones
 a = 10
 b = 20
-c = 123
-x = 3.14
-msg = "Hola mundo"
+e = 123
+x = 3
+f = 5
 
-// Caso: comparación simple y llamada a la función especial
-IF (a == b) THEN
-  show "a y b son iguales"
-ELSE
-  // #Iguales toma una expresión y una lista de ids entre corchetes
-  show #Iguales(a, [b, c])
-ENDIF
+show #Iguales( a + w/b, [x, e, f] )
 
-// Uso de negación lógica y operadores combinados
-IF  (!(a == b) && (x > 2.0)) THEN
-  show "Condición compuesta verdadera"
-ENDIF
-
-// Bucle REPEAT ... UNTIL
-REPEAT
-  a = a + 1
-  show a
-UNTIL a >= 12
-
-// Mostrar mensaje final
-show msg
 
 ENDPROGRAM.SECTION

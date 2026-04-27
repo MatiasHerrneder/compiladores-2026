@@ -242,7 +242,7 @@ public class Ventana extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-                System.out.println("Error en el análisis: " + e.getMessage());
+                System.out.println("Error en el analisis: " + e.getMessage());
             }
 
         } catch (Error e) {
@@ -250,7 +250,7 @@ public class Ventana extends javax.swing.JFrame {
         } catch (Exception e) {
             // e.printStackTrace(); // por si todavía está apuntando a la consola
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Error en el análisis: " + e.getMessage(),
+                    "Error en el analisis: " + e.getMessage(),
                     "Error",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }

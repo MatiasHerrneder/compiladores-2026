@@ -19,11 +19,12 @@ public class NodoDeclaracion extends Nodo {
     protected String graficar(String idPadre) {
         final String miId = "nodo_decl_" + System.identityHashCode(this);
         StringBuilder resultado = new StringBuilder();
-        String res = "Decl: "; 
+        String res = ""; 
         res += (tipoDato + " : ");
         for (String var : nombreVariable) {
             res += (var + ", ");
         }
+        res = res.substring(0, res.length() - 2);
         resultado.append(miId + " [label=\"Decl: " + res + "\"]\n");
         if (idPadre != null) {
             resultado.append(idPadre + " -- " + miId + "\n");

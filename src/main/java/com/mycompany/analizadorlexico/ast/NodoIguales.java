@@ -19,6 +19,8 @@ public class NodoIguales extends NodoExpresion {
 
     /** Expresión pivot contra la que se comparan todos los elementos. */
     private final NodoExpresion pivot;
+    private final NodoVariable comparador;
+    private final NodoVariable contador;
 
     /**
      * Lista de listas de expresiones.
@@ -31,6 +33,10 @@ public class NodoIguales extends NodoExpresion {
         super("IGUALES");
         this.pivot = pivot;
         this.listas = listas;
+        this.comparador = new NodoVariable("comparador");
+        this.contador = new NodoVariable("contador");
+        comparador.setTipoSemantico("INT");
+        contador.setTipoSemantico("INT");
     }
 
     public NodoExpresion getPivot() {
@@ -54,29 +60,41 @@ public class NodoIguales extends NodoExpresion {
             resultado.append(idPadre + " -- " + miId + "\n");
         }
 
-        // Nodo pivot
-        String idPivot = "nodo_pivot_" + System.identityHashCode(this);
-        resultado.append(idPivot + " [label=\"pivot\"]\n");
-        resultado.append(miId + " -- " + idPivot + "\n");
-        resultado.append(this.pivot.graficar(idPivot));
+        // comp = pivot  → NodoAsignacion
+        NodoAsignacion asigComp = new NodoAsignacion(comparador, pivot);
+        resultado.append(asigComp.graficar(miId));
 
-        // Nodos para cada lista
-        int indice = 0;
-        for (List<NodoExpresion> lista : this.listas) {
-            String idLista = "nodo_lista_" + indice + "_" + System.identityHashCode(this);
-            resultado.append(idLista + " [label=\"Lista " + indice + "\"]\n");
-            resultado.append(miId + " -- " + idLista + "\n");
+        // contador = 0  → NodoAsignacion
+        NodoConstanteInt cero = new NodoConstanteInt(0);
+        NodoAsignacion asigContador = new NodoAsignacion(contador, cero);
+        resultado.append(asigContador.graficar(miId));
 
-            if (lista.isEmpty()) {
-                String idVacia = "nodo_vacia_" + indice + "_" + System.identityHashCode(this);
-                resultado.append(idVacia + " [label=\"[]\"]\n");
-                resultado.append(idLista + " -- " + idVacia + "\n");
-            } else {
-                for (NodoExpresion elemento : lista) {
-                    resultado.append(elemento.graficar(idLista));
-                }
+        // IF por cada elemento de cada lista
+        for (List<NodoExpresion> lista : listas) {
+            for (NodoExpresion elemento : lista) {
+                
+                // Condicion: comp == elemento  → NodoCondicion
+                NodoVariable comp = new NodoVariable("comparador");
+                comp.setTipoSemantico("INT");
+                NodoCondicion condicion = new NodoCondicion(comp, "==", elemento);
+                
+                NodoConstanteInt uno = new NodoConstanteInt(1);
+                // contador = contador + 1  → NodoAsignacion
+                NodoVariable contRef1 = new NodoVariable("contador");
+                contRef1.setTipoSemantico("INT");
+                NodoVariable contRef2 = new NodoVariable("contador");
+                contRef2.setTipoSemantico("INT");
+                NodoExpresionBinaria suma = new NodoExpresionBinaria(contRef1, "+", uno);
+                NodoAsignacion asigInc = new NodoAsignacion(contRef2, suma);
+
+                // Then: lista con la asignacion
+                List<NodoSentencia> sentenciasThen = new ArrayList<>();
+                sentenciasThen.add(asigInc);
+
+                // IF → NodoIf
+                NodoIf ifNodo = new NodoIf(condicion, sentenciasThen, null);
+                resultado.append(ifNodo.graficar(miId));
             }
-            indice++;
         }
 
         return resultado.toString();

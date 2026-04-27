@@ -660,7 +660,7 @@ class CUP$parser$actions {
               );
               throw new RuntimeException("Error semantico en asignacion.");
           }
-          RESULT = new NodoAsignacion(id.toString(), e);
+          RESULT = new NodoAsignacion(new NodoVariable(id.toString()), e);
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("asignacion",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

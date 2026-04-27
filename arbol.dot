@@ -1,100 +1,120 @@
 graph G {nodo_programa [label="Programa"]
-nodo_asig_142455398 [label=":= (a)"]
-nodo_programa -- nodo_asig_142455398
-nodo_cte_i_131679670 [label="CTE_I: 10"]
-nodo_asig_142455398 -- nodo_cte_i_131679670
-nodo_asig_624920126 [label=":= (b)"]
-nodo_programa -- nodo_asig_624920126
-nodo_cte_i_1364493742 [label="CTE_I: 20"]
-nodo_asig_624920126 -- nodo_cte_i_1364493742
-nodo_asig_878703456 [label=":= (c)"]
-nodo_programa -- nodo_asig_878703456
-nodo_cte_i_2045179048 [label="CTE_I: 123"]
-nodo_asig_878703456 -- nodo_cte_i_2045179048
-nodo_asig_540115932 [label=":= (x)"]
-nodo_programa -- nodo_asig_540115932
-nodo_cte_f_1430068097 [label="CTE_F: 3.14"]
-nodo_asig_540115932 -- nodo_cte_f_1430068097
-nodo_asig_1105230274 [label=":= (msg)"]
-nodo_programa -- nodo_asig_1105230274
-nodo_cte_str_1323854037 [label="CTE_STR: 'Hola mundo'"]
-nodo_asig_1105230274 -- nodo_cte_str_1323854037
-nodo_1617618909 [label="IF"]
-nodo_programa -- nodo_1617618909
-nodo_cond_2028522811 [label="=="]
-nodo_1617618909 -- nodo_cond_2028522811
-nodo_var_981767565 [label="Var: a"]
-nodo_cond_2028522811 -- nodo_var_981767565
-nodo_var_933752008 [label="Var: b"]
-nodo_cond_2028522811 -- nodo_var_933752008
-nodo_1176404126 [label="Then"]
-nodo_1617618909 -- nodo_1176404126
-nodo_show_1056646616 [label="SHOW"]
-nodo_1176404126 -- nodo_show_1056646616
-nodo_cte_str_541976439 [label="CTE_STR: 'a y b son iguales'"]
-nodo_show_1056646616 -- nodo_cte_str_541976439
-nodo_6774724 [label="Else"]
-nodo_1617618909 -- nodo_6774724
-nodo_show_233439525 [label="SHOW"]
-nodo_6774724 -- nodo_show_233439525
-nodo_iguales_1784164517 [label="#Iguales"]
-nodo_show_233439525 -- nodo_iguales_1784164517
-nodo_pivot_1784164517 [label="pivot"]
-nodo_iguales_1784164517 -- nodo_pivot_1784164517
-nodo_var_627119302 [label="Var: a"]
-nodo_pivot_1784164517 -- nodo_var_627119302
-nodo_lista_0_1784164517 [label="Lista 0"]
-nodo_iguales_1784164517 -- nodo_lista_0_1784164517
-nodo_var_697940526 [label="Var: b"]
-nodo_lista_0_1784164517 -- nodo_var_697940526
-nodo_var_1948742929 [label="Var: c"]
-nodo_lista_0_1784164517 -- nodo_var_1948742929
-nodo_1599192616 [label="IF"]
-nodo_programa -- nodo_1599192616
-nodo_cond_1924875808 [label="AND"]
-nodo_1599192616 -- nodo_cond_1924875808
-nodo_cond_370662035 [label="NOT"]
-nodo_cond_1924875808 -- nodo_cond_370662035
-nodo_cond_1507306173 [label="=="]
-nodo_cond_370662035 -- nodo_cond_1507306173
-nodo_var_187039569 [label="Var: a"]
-nodo_cond_1507306173 -- nodo_var_187039569
-nodo_var_596062803 [label="Var: b"]
-nodo_cond_1507306173 -- nodo_var_596062803
-nodo_cond_200062962 [label=">"]
-nodo_cond_1924875808 -- nodo_cond_200062962
-nodo_var_1871341168 [label="Var: x"]
-nodo_cond_200062962 -- nodo_var_1871341168
-nodo_cte_f_1265746855 [label="CTE_F: 2.0"]
-nodo_cond_200062962 -- nodo_cte_f_1265746855
-nodo_912041107 [label="Then"]
-nodo_1599192616 -- nodo_912041107
-nodo_show_1069747146 [label="SHOW"]
-nodo_912041107 -- nodo_show_1069747146
-nodo_cte_str_54936484 [label="CTE_STR: 'Condición compuesta verdadera'"]
-nodo_show_1069747146 -- nodo_cte_str_54936484
-nodo_repeat_1190118544 [label="REPEAT"]
-nodo_programa -- nodo_repeat_1190118544
-nodo_asig_1687875208 [label=":= (a)"]
-nodo_repeat_1190118544 -- nodo_asig_1687875208
-nodo_expbin_1134572682 [label="+"]
-nodo_asig_1687875208 -- nodo_expbin_1134572682
-nodo_var_1917453369 [label="Var: a"]
-nodo_expbin_1134572682 -- nodo_var_1917453369
-nodo_cte_i_1253676452 [label="CTE_I: 1"]
-nodo_expbin_1134572682 -- nodo_cte_i_1253676452
-nodo_show_2036649173 [label="SHOW"]
-nodo_repeat_1190118544 -- nodo_show_2036649173
-nodo_var_992129815 [label="Var: a"]
-nodo_show_2036649173 -- nodo_var_992129815
-nodo_cond_434832262 [label=">="]
-nodo_repeat_1190118544 -- nodo_cond_434832262
-nodo_var_536453546 [label="Var: a"]
-nodo_cond_434832262 -- nodo_var_536453546
-nodo_cte_i_1076151524 [label="CTE_I: 12"]
-nodo_cond_434832262 -- nodo_cte_i_1076151524
-nodo_show_1848667644 [label="SHOW"]
-nodo_programa -- nodo_show_1848667644
-nodo_var_797353103 [label="Var: msg"]
-nodo_show_1848667644 -- nodo_var_797353103
+nodo_decvar_1317328735 [label="DECVAR"]
+nodo_programa -- nodo_decvar_1317328735
+nodo_decl_1293213976 [label="Decl: INT : a, b, w, x, e, f"]
+nodo_decvar_1317328735 -- nodo_decl_1293213976
+nodo_asig_1130226802 [label="="]
+nodo_programa -- nodo_asig_1130226802
+nodo_var_1182003284 [label="Var: a"]
+nodo_asig_1130226802 -- nodo_var_1182003284
+nodo_cte_i_782629354 [label="CTE_I: 10"]
+nodo_asig_1130226802 -- nodo_cte_i_782629354
+nodo_asig_1154728199 [label="="]
+nodo_programa -- nodo_asig_1154728199
+nodo_var_1744946075 [label="Var: b"]
+nodo_asig_1154728199 -- nodo_var_1744946075
+nodo_cte_i_833191839 [label="CTE_I: 20"]
+nodo_asig_1154728199 -- nodo_cte_i_833191839
+nodo_asig_818064105 [label="="]
+nodo_programa -- nodo_asig_818064105
+nodo_var_1791204879 [label="Var: e"]
+nodo_asig_818064105 -- nodo_var_1791204879
+nodo_cte_i_205034967 [label="CTE_I: 123"]
+nodo_asig_818064105 -- nodo_cte_i_205034967
+nodo_asig_1989629512 [label="="]
+nodo_programa -- nodo_asig_1989629512
+nodo_var_1403465617 [label="Var: x"]
+nodo_asig_1989629512 -- nodo_var_1403465617
+nodo_cte_i_635625484 [label="CTE_I: 3"]
+nodo_asig_1989629512 -- nodo_cte_i_635625484
+nodo_asig_1832669002 [label="="]
+nodo_programa -- nodo_asig_1832669002
+nodo_var_567632307 [label="Var: f"]
+nodo_asig_1832669002 -- nodo_var_567632307
+nodo_cte_i_1273239999 [label="CTE_I: 5"]
+nodo_asig_1832669002 -- nodo_cte_i_1273239999
+nodo_show_2041864783 [label="SHOW"]
+nodo_programa -- nodo_show_2041864783
+nodo_iguales_1996305452 [label="#Iguales"]
+nodo_show_2041864783 -- nodo_iguales_1996305452
+nodo_asig_303640621 [label="="]
+nodo_iguales_1996305452 -- nodo_asig_303640621
+nodo_var_393071730 [label="Var: comparador"]
+nodo_asig_303640621 -- nodo_var_393071730
+nodo_expbin_1292989130 [label="/"]
+nodo_asig_303640621 -- nodo_expbin_1292989130
+nodo_expbin_1389519632 [label="+"]
+nodo_expbin_1292989130 -- nodo_expbin_1389519632
+nodo_var_1445251104 [label="Var: a"]
+nodo_expbin_1389519632 -- nodo_var_1445251104
+nodo_var_794001610 [label="Var: w"]
+nodo_expbin_1389519632 -- nodo_var_794001610
+nodo_var_1771188424 [label="Var: b"]
+nodo_expbin_1292989130 -- nodo_var_1771188424
+nodo_asig_152455679 [label="="]
+nodo_iguales_1996305452 -- nodo_asig_152455679
+nodo_var_1477225714 [label="Var: contador"]
+nodo_asig_152455679 -- nodo_var_1477225714
+nodo_cte_i_581439105 [label="CTE_I: 0"]
+nodo_asig_152455679 -- nodo_cte_i_581439105
+nodo_1094931370 [label="IF"]
+nodo_iguales_1996305452 -- nodo_1094931370
+nodo_cond_444636151 [label="=="]
+nodo_1094931370 -- nodo_cond_444636151
+nodo_var_560099561 [label="Var: comparador"]
+nodo_cond_444636151 -- nodo_var_560099561
+nodo_var_1493817260 [label="Var: x"]
+nodo_cond_444636151 -- nodo_var_1493817260
+nodo_1130151490 [label="Then"]
+nodo_1094931370 -- nodo_1130151490
+nodo_asig_416902016 [label="="]
+nodo_1130151490 -- nodo_asig_416902016
+nodo_var_110629967 [label="Var: contador"]
+nodo_asig_416902016 -- nodo_var_110629967
+nodo_expbin_886032717 [label="+"]
+nodo_asig_416902016 -- nodo_expbin_886032717
+nodo_var_315088696 [label="Var: contador"]
+nodo_expbin_886032717 -- nodo_var_315088696
+nodo_cte_i_1100034955 [label="CTE_I: 1"]
+nodo_expbin_886032717 -- nodo_cte_i_1100034955
+nodo_124616090 [label="IF"]
+nodo_iguales_1996305452 -- nodo_124616090
+nodo_cond_1294096795 [label="=="]
+nodo_124616090 -- nodo_cond_1294096795
+nodo_var_1630560536 [label="Var: comparador"]
+nodo_cond_1294096795 -- nodo_var_1630560536
+nodo_var_52376217 [label="Var: e"]
+nodo_cond_1294096795 -- nodo_var_52376217
+nodo_695540702 [label="Then"]
+nodo_124616090 -- nodo_695540702
+nodo_asig_1167598279 [label="="]
+nodo_695540702 -- nodo_asig_1167598279
+nodo_var_447305070 [label="Var: contador"]
+nodo_asig_1167598279 -- nodo_var_447305070
+nodo_expbin_2029244290 [label="+"]
+nodo_asig_1167598279 -- nodo_expbin_2029244290
+nodo_var_2035908777 [label="Var: contador"]
+nodo_expbin_2029244290 -- nodo_var_2035908777
+nodo_cte_i_2110987103 [label="CTE_I: 1"]
+nodo_expbin_2029244290 -- nodo_cte_i_2110987103
+nodo_763442094 [label="IF"]
+nodo_iguales_1996305452 -- nodo_763442094
+nodo_cond_1273521731 [label="=="]
+nodo_763442094 -- nodo_cond_1273521731
+nodo_var_2114055007 [label="Var: comparador"]
+nodo_cond_1273521731 -- nodo_var_2114055007
+nodo_var_611451287 [label="Var: f"]
+nodo_cond_1273521731 -- nodo_var_611451287
+nodo_468520483 [label="Then"]
+nodo_763442094 -- nodo_468520483
+nodo_asig_1070940851 [label="="]
+nodo_468520483 -- nodo_asig_1070940851
+nodo_var_931656052 [label="Var: contador"]
+nodo_asig_1070940851 -- nodo_var_931656052
+nodo_expbin_1185791944 [label="+"]
+nodo_asig_1070940851 -- nodo_expbin_1185791944
+nodo_var_901922088 [label="Var: contador"]
+nodo_expbin_1185791944 -- nodo_var_901922088
+nodo_cte_i_538391033 [label="CTE_I: 1"]
+nodo_expbin_1185791944 -- nodo_cte_i_538391033
 }
