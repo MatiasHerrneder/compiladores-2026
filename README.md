@@ -20,3 +20,6 @@
 
 -> Hacer doble click para correrlo o ejecutar: ```java -jar AnalizadorSintactico.jar```
 
+## Para generar el AST
+
+-> Hacer doble click para correrlo o ejecutar: ```java -jar AnalizadorAST.jar```

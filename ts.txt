@@ -10,3 +10,4 @@
 |                                _20| INT_CONST|          |                                 20|    |
 |                               _123| INT_CONST|          |                                123|    |
 |                                 _3| INT_CONST|          |                                  3|    |
+|                                 _5| INT_CONST|          |                                  5|    |
