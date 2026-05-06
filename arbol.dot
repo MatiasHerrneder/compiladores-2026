@@ -1,0 +1,30 @@
+graph G {nodo_programa [label="Programa"]
+nodo_var_1042802894 [label="Var: a"]
+nodo_asig_207677606 -- nodo_var_1042802894
+
+nodo_cte_i_2128368349 [label="CTE_I: 10"]
+nodo_asig_207677606 -- nodo_cte_i_2128368349
+nodo_asig_207677606 [label="="]
+nodo_programa -- nodo_asig_207677606
+nodo_var_960668247 [label="Var: b"]
+nodo_asig_854350196 -- nodo_var_960668247
+
+nodo_cte_i_941771817 [label="CTE_I: 20"]
+nodo_asig_854350196 -- nodo_cte_i_941771817
+nodo_asig_854350196 [label="="]
+nodo_programa -- nodo_asig_854350196
+nodo_var_1954771289 [label="Var: e"]
+nodo_asig_620014410 -- nodo_var_1954771289
+
+nodo_cte_i_1484731780 [label="CTE_I: 123"]
+nodo_asig_620014410 -- nodo_cte_i_1484731780
+nodo_asig_620014410 [label="="]
+nodo_programa -- nodo_asig_620014410
+nodo_var_1941516869 [label="Var: x"]
+nodo_asig_1922460070 -- nodo_var_1941516869
+
+nodo_cte_i_484416722 [label="CTE_I: 3"]
+nodo_asig_1922460070 -- nodo_cte_i_484416722
+nodo_asig_1922460070 [label="="]
+nodo_programa -- nodo_asig_1922460070
+}
