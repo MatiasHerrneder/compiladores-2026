@@ -395,7 +395,7 @@ class CUP$parser$actions {
 		ArrayList<NodoSentencia> s = (ArrayList<NodoSentencia>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
           System.out.println("Regla program");
-          RESULT = new NodoPrograma(d, s);
+          RESULT = new NodoPrograma(s);
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -411,7 +411,7 @@ class CUP$parser$actions {
 		
           ArrayList<NodoSentencia> l = new ArrayList<>();
           l.add(e);
-          RESULT = new NodoPrograma(null, l);
+          RESULT = new NodoPrograma(l);
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

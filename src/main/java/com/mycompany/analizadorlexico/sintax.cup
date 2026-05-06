@@ -106,13 +106,13 @@ program ::=
       PROGRAM_SECTION declaraciones:d sentencias:s END_PROGRAM_SECTION
       {:
           System.out.println("Regla program");
-          RESULT = new NodoPrograma(d, s);
+          RESULT = new NodoPrograma(s);
       :}
     | escritura_sin_var:e
       {:
           ArrayList<NodoSentencia> l = new ArrayList<>();
           l.add(e);
-          RESULT = new NodoPrograma(null, l);
+          RESULT = new NodoPrograma(l);
       :}
     ;
 

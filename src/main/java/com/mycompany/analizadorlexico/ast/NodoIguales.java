@@ -51,23 +51,40 @@ public class NodoIguales extends NodoExpresion {
     public String getTipoSemantico() { return "INT"; }
 
     @Override
+    public String graficarConVariable (NodoVariable variable, String id) {
+        StringBuilder resultado = this.graficarSentencias();
+        resultado.append(variable.graficar(id));
+        resultado.append(this.graficarContador(id));
+        return resultado.toString();
+    }
+
+    @Override
     protected String graficar(String idPadre) {
-        final String miId = "nodo_iguales_" + System.identityHashCode(this);
+        StringBuilder resultado = this.graficarSentencias();
+        resultado.append(this.graficarContador(idPadre));
+
+        return resultado.toString();
+    }
+
+    private StringBuilder graficarSentencias () {
+        String idPrograma = "nodo_programa";
+        //final String miId = "nodo_iguales_" + System.identityHashCode(this);
+        
+
+        //resultado.append(miId + " [label=\"#Iguales\"]\n");
+        //if (idPadre != null) {
+        //    resultado.append(idPadre + " -- " + miId + "\n");
+        //}
+
         StringBuilder resultado = new StringBuilder();
-
-        resultado.append(miId + " [label=\"#Iguales\"]\n");
-        if (idPadre != null) {
-            resultado.append(idPadre + " -- " + miId + "\n");
-        }
-
         // comp = pivot  → NodoAsignacion
         NodoAsignacion asigComp = new NodoAsignacion(comparador, pivot);
-        resultado.append(asigComp.graficar(miId));
+        resultado.append(asigComp.graficar(idPrograma));
 
         // contador = 0  → NodoAsignacion
         NodoConstanteInt cero = new NodoConstanteInt(0);
         NodoAsignacion asigContador = new NodoAsignacion(contador, cero);
-        resultado.append(asigContador.graficar(miId));
+        resultado.append(asigContador.graficar(idPrograma));
 
         // IF por cada elemento de cada lista
         for (List<NodoExpresion> lista : listas) {
@@ -93,10 +110,15 @@ public class NodoIguales extends NodoExpresion {
 
                 // IF → NodoIf
                 NodoIf ifNodo = new NodoIf(condicion, sentenciasThen, null);
-                resultado.append(ifNodo.graficar(miId));
+                resultado.append(ifNodo.graficar(idPrograma));
             }
         }
+        return resultado;
+    }
 
-        return resultado.toString();
+    private String graficarContador(String idPadre) {
+        NodoVariable contador = new NodoVariable("contador");
+        contador.setTipoSemantico("INT");
+        return contador.graficar(idPadre);
     }
 }

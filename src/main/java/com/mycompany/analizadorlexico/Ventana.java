@@ -7,6 +7,7 @@ package com.mycompany.analizadorlexico;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.*;
 
@@ -14,6 +15,8 @@ import com.mycompany.analizadorlexico.ast.NodoPrograma;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -220,10 +223,6 @@ public class Ventana extends javax.swing.JFrame {
                 if (arbol != null) {
                     String dot = arbol.graficar();
                     mostrarTextoEnVentana("Árbol Sintáctico (DOT)", dot);
-                }
-
-                if (arbol != null) {
-                    String dot = arbol.graficar();
 
                     // Guardar el .dot
                     java.nio.file.Files.write(
@@ -231,11 +230,27 @@ public class Ventana extends javax.swing.JFrame {
                         dot.getBytes()
                     );
 
+                    // Si dot falla, evitamos mostrar un PNG viejo de una corrida previa.
+                    java.nio.file.Files.deleteIfExists(java.nio.file.Path.of("arbol.png"));
+
                     // Renderizar con Graphviz a PNG
-                    Process proc = Runtime.getRuntime().exec(
-                        new String[]{"dot", "-Tpng", "arbol.dot", "-o", "arbol.png"}
-                    );
-                    proc.waitFor();
+                    ProcessBuilder pb = new ProcessBuilder("dot", "-Tpng", "arbol.dot", "-o", "arbol.png");
+                    pb.redirectErrorStream(true);
+                    Process proc = pb.start();
+                    String salidaDot;
+                    try (InputStream is = proc.getInputStream()) {
+                        salidaDot = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+                    }
+                    int exitCode = proc.waitFor();
+                    if (exitCode != 0) {
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Graphviz (dot) falló al generar arbol.png.\n" + salidaDot,
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        return;
+                    }
 
                     // Mostrar en ventana
                     mostrarArbol("arbol.png");
@@ -318,7 +333,24 @@ public class Ventana extends javax.swing.JFrame {
             return;
         }
 
-        ImageIcon icon = new ImageIcon(rutaPng);
+        final BufferedImage imagen;
+        try {
+            imagen = ImageIO.read(archivo);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo leer la imagen del árbol.\n" + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (imagen == null) {
+            JOptionPane.showMessageDialog(this,
+                "arbol.png no es una imagen válida.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cargamos desde BufferedImage para evitar cache por nombre de archivo.
+        ImageIcon icon = new ImageIcon(imagen);
         JLabel label = new JLabel(icon);
         JScrollPane scroll = new JScrollPane(label);
         scroll.setPreferredSize(new Dimension(900, 600));

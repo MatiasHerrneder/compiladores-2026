@@ -3,12 +3,12 @@ package com.mycompany.analizadorlexico.ast;
 import java.util.List;
 
 public class NodoPrograma extends Nodo {
-    private final NodoDecVar decVar;
+    //private final NodoDecVar decVar;
     private final List<NodoSentencia> sentencias;
 
-    public NodoPrograma(NodoDecVar decVar, List<NodoSentencia> sentencias) {
+    public NodoPrograma(/*NodoDecVar decVar, */List<NodoSentencia> sentencias) {
         super("PGM");
-        this.decVar = decVar;
+        //this.decVar = decVar;
         this.sentencias = sentencias;
     }
 
@@ -27,7 +27,7 @@ public class NodoPrograma extends Nodo {
 
         resultado.append(miId + " [label=\"Programa\"]\n");
         
-        resultado.append(decVar.graficar(miId));
+        //resultado.append(decVar.graficar(miId));
 
         for (NodoSentencia sentencia : this.sentencias) {
             resultado.append(sentencia.graficar(miId));

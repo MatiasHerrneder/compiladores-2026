@@ -10,9 +10,7 @@ a = 10
 b = 20
 e = 123
 x = 3
-f = 5
 
-show #Iguales( a + w/b, [x, e, f] )
 
 
 ENDPROGRAM.SECTION
