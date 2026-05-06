@@ -4,22 +4,37 @@
 ### Integrantes: 
 * Thiago Puyelli
 * Bautista Pereyra Buch
-* Enzo Federico Bianchi
 * Matias Herneder
 
-# Uso de los programas 
-
-## Para usar el analizador Lexico:
--> Descargar y abrir el archivo "AnalizadorLexico.jar"
-
--> Hacer doble click para correrlo o ejecutar: ```java -jar AnalizadorLexico.jar```
-
-
-## Para usar el analizador Sintáctico:
--> Descargar y abrir el archivo en "/target/AnalizadorSintactico.jar"
-
--> Hacer doble click para correrlo o ejecutar: ```java -jar AnalizadorSintactico.jar```
+# Generacion de codigo intermedio
 
 ## Para generar el AST
 
 -> Hacer doble click para correrlo o ejecutar: ```java -jar AnalizadorAST.jar```
+
+## Ejemplo de prueba
+Con el siguiente codigo de ejemplo:
+
+```
+PROGRAM.SECTION
+
+/* Declaraciones de variables */
+DECVAR
+  INT a, b, w, x, e, f
+ENDDECVAR
+
+// Inicializaciones / asignaciones
+a = 10
+b = 20
+e = 123
+x = 3
+f = 5
+
+show #Iguales( a + w/b, [x, e, f] )
+
+
+ENDPROGRAM.SECTION
+```
+
+Obtuvimos el siguiente arbol:
+![AST](arbol.png)
