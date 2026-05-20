@@ -2,17 +2,23 @@ PROGRAM.SECTION
 
 /* Declaraciones de variables */
 DECVAR
-  INT a, b, w, x, e, f
+  INT a, b, c
+  FLOAT x
+  STRING msg
 ENDDECVAR
 
 // Inicializaciones / asignaciones
 a = 10
 b = 20
-e = 123
-x = 3
-f = 5
+c = 123
+x = 3.14
+msg = "Hola mundo"
 
-show #Iguales( a + w/b, [x, e, f] )
+// Bucle REPEAT ... UNTIL
+REPEAT
+  a = a + 1
+  show a
+UNTIL a <= 12
 
 
 ENDPROGRAM.SECTION

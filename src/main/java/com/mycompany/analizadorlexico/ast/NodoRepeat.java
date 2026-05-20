@@ -17,6 +17,7 @@ public class NodoRepeat extends NodoSentencia {
         final String miId = "nodo_repeat_" + System.identityHashCode(this);
         StringBuilder resultado = new StringBuilder();
         resultado.append(miId + " [label=\"REPEAT\"]\n");
+        resultado.append(this.condicion.graficarRotado(miId));
         if (idPadre != null) {
             resultado.append(idPadre + " -- " + miId + "\n");
         }
@@ -24,7 +25,6 @@ public class NodoRepeat extends NodoSentencia {
         for (NodoSentencia s : sentencias) {
             resultado.append(s.graficar(miId));
         }
-        resultado.append(this.condicion.graficar(miId));
 
         return resultado.toString();
     }

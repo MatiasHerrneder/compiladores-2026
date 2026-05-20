@@ -45,6 +45,46 @@ public class NodoCondicion extends Nodo {
     public NodoExpresion getDerecha()   { return derecha; }
     public String getOperador()         { return operador; }
 
+    public String graficarRotado(String idPadre) {
+        String operadorInvertido = invertirOperador(operador);
+        NodoCondicion nodoRotado;
+
+        if (izquierda != null || derecha != null) {
+            nodoRotado = new NodoCondicion(izquierda, operadorInvertido, derecha);
+        } else if (segundaCondicion != null) {
+            nodoRotado = new NodoCondicion(operadorInvertido, izqCondicion, segundaCondicion);
+        } else if (izqCondicion != null) {
+            nodoRotado = new NodoCondicion(operadorInvertido, izqCondicion);
+        } else {
+            return graficar(idPadre);
+        }
+
+        return nodoRotado.graficar(idPadre);
+    }
+
+    private String invertirOperador(String op) {
+        switch (op) {
+            case "!=":
+                return "==";
+            case "==":
+                return "!=";
+            case ">=":
+                return "<";
+            case "<":
+                return ">=";
+            case "<=":
+                return ">";
+            case ">":
+                return "<=";
+            case "AND":
+                return "OR";
+            case "OR":
+                return "AND";
+            default:
+                return op;
+        }
+    }
+
     @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_cond_" + System.identityHashCode(this);
