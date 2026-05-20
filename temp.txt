@@ -14,11 +14,12 @@ c = 123
 x = 3.14
 msg = "Hola mundo"
 
+
 // Bucle REPEAT ... UNTIL
 REPEAT
   a = a + 1
   show a
-UNTIL a <= 12
+UNTIL a >= 12
 
 
 ENDPROGRAM.SECTION

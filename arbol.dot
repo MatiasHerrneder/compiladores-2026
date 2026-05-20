@@ -1,60 +1,60 @@
 graph G {nodo_programa [label="Programa"]
-nodo_var_2080177709 [label="Var: a"]
-nodo_asig_1314522523 -- nodo_var_2080177709
+nodo_var_1205453502 [label="Var: a"]
+nodo_asig_1173750329 -- nodo_var_1205453502
 
-nodo_cte_i_526037431 [label="CTE_I: 10"]
-nodo_asig_1314522523 -- nodo_cte_i_526037431
-nodo_asig_1314522523 [label="="]
-nodo_programa -- nodo_asig_1314522523
-nodo_var_1207443411 [label="Var: b"]
-nodo_asig_1494265783 -- nodo_var_1207443411
+nodo_cte_i_999363463 [label="CTE_I: 10"]
+nodo_asig_1173750329 -- nodo_cte_i_999363463
+nodo_asig_1173750329 [label="="]
+nodo_programa -- nodo_asig_1173750329
+nodo_var_927366868 [label="Var: b"]
+nodo_asig_1112824685 -- nodo_var_927366868
 
-nodo_cte_i_1542032535 [label="CTE_I: 20"]
-nodo_asig_1494265783 -- nodo_cte_i_1542032535
-nodo_asig_1494265783 [label="="]
-nodo_programa -- nodo_asig_1494265783
-nodo_var_1304768970 [label="Var: c"]
-nodo_asig_301226324 -- nodo_var_1304768970
+nodo_cte_i_1048811184 [label="CTE_I: 20"]
+nodo_asig_1112824685 -- nodo_cte_i_1048811184
+nodo_asig_1112824685 [label="="]
+nodo_programa -- nodo_asig_1112824685
+nodo_var_1842481701 [label="Var: c"]
+nodo_asig_230533068 -- nodo_var_1842481701
 
-nodo_cte_i_1246013734 [label="CTE_I: 123"]
-nodo_asig_301226324 -- nodo_cte_i_1246013734
-nodo_asig_301226324 [label="="]
-nodo_programa -- nodo_asig_301226324
-nodo_var_1859376603 [label="Var: x"]
-nodo_asig_1574836685 -- nodo_var_1859376603
+nodo_cte_i_1776707989 [label="CTE_I: 123"]
+nodo_asig_230533068 -- nodo_cte_i_1776707989
+nodo_asig_230533068 [label="="]
+nodo_programa -- nodo_asig_230533068
+nodo_var_730929514 [label="Var: x"]
+nodo_asig_1265783823 -- nodo_var_730929514
 
-nodo_cte_f_175960746 [label="CTE_F: 3.14"]
-nodo_asig_1574836685 -- nodo_cte_f_175960746
-nodo_asig_1574836685 [label="="]
-nodo_programa -- nodo_asig_1574836685
-nodo_var_1218644549 [label="Var: msg"]
-nodo_asig_1696495450 -- nodo_var_1218644549
+nodo_cte_f_1458552095 [label="CTE_F: 3.14"]
+nodo_asig_1265783823 -- nodo_cte_f_1458552095
+nodo_asig_1265783823 [label="="]
+nodo_programa -- nodo_asig_1265783823
+nodo_var_313581113 [label="Var: msg"]
+nodo_asig_1142345965 -- nodo_var_313581113
 
-nodo_cte_str_942568327 [label="CTE_STR: 'Hola mundo'"]
-nodo_asig_1696495450 -- nodo_cte_str_942568327
-nodo_asig_1696495450 [label="="]
-nodo_programa -- nodo_asig_1696495450
-nodo_repeat_1437216650 [label="REPEAT"]
-nodo_cond_1125660354 [label=">"]
-nodo_repeat_1437216650 -- nodo_cond_1125660354
-nodo_var_330956230 [label="Var: a"]
-nodo_cond_1125660354 -- nodo_var_330956230
-nodo_cte_i_1488983677 [label="CTE_I: 12"]
-nodo_cond_1125660354 -- nodo_cte_i_1488983677
-nodo_programa -- nodo_repeat_1437216650
-nodo_var_1581131750 [label="Var: a"]
-nodo_asig_1553118352 -- nodo_var_1581131750
+nodo_cte_str_2051222887 [label="CTE_STR: 'Hola mundo'"]
+nodo_asig_1142345965 -- nodo_cte_str_2051222887
+nodo_asig_1142345965 [label="="]
+nodo_programa -- nodo_asig_1142345965
+nodo_repeat_774577936 [label="REPEAT"]
+nodo_cond_1548235648 [label="<"]
+nodo_repeat_774577936 -- nodo_cond_1548235648
+nodo_var_1209892646 [label="Var: a"]
+nodo_cond_1548235648 -- nodo_var_1209892646
+nodo_cte_i_735468375 [label="CTE_I: 12"]
+nodo_cond_1548235648 -- nodo_cte_i_735468375
+nodo_programa -- nodo_repeat_774577936
+nodo_var_1077608127 [label="Var: a"]
+nodo_asig_1567822498 -- nodo_var_1077608127
 
-nodo_expbin_37070378 [label="+"]
-nodo_asig_1553118352 -- nodo_expbin_37070378
-nodo_var_1511930863 [label="Var: a"]
-nodo_expbin_37070378 -- nodo_var_1511930863
-nodo_cte_i_325132808 [label="CTE_I: 1"]
-nodo_expbin_37070378 -- nodo_cte_i_325132808
-nodo_asig_1553118352 [label="="]
-nodo_repeat_1437216650 -- nodo_asig_1553118352
-nodo_var_325370816 [label="Var: a"]
-nodo_show_1011820181 -- nodo_var_325370816
-nodo_show_1011820181 [label="SHOW"]
-nodo_repeat_1437216650 -- nodo_show_1011820181
+nodo_expbin_1677544913 [label="+"]
+nodo_asig_1567822498 -- nodo_expbin_1677544913
+nodo_var_2053684762 [label="Var: a"]
+nodo_expbin_1677544913 -- nodo_var_2053684762
+nodo_cte_i_1061901815 [label="CTE_I: 1"]
+nodo_expbin_1677544913 -- nodo_cte_i_1061901815
+nodo_asig_1567822498 [label="="]
+nodo_repeat_774577936 -- nodo_asig_1567822498
+nodo_var_554289313 [label="Var: a"]
+nodo_show_680758183 -- nodo_var_554289313
+nodo_show_680758183 [label="SHOW"]
+nodo_repeat_774577936 -- nodo_show_680758183
 }
