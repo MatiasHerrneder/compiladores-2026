@@ -28,6 +28,10 @@ public class NodoRepeat extends NodoSentencia {
 
         return resultado.toString();
     }
-}
 
+    @Override
+    public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        asm.append("; TODO assembler para REPEAT aun no implementado\n");
+    }
+}
 

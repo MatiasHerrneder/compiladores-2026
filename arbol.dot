@@ -1,60 +1,16 @@
 graph G {nodo_programa [label="Programa"]
-nodo_var_1205453502 [label="Var: a"]
-nodo_asig_1173750329 -- nodo_var_1205453502
+nodo_var_1587648102 [label="Var: x"]
+nodo_asig_192951839 -- nodo_var_1587648102
 
-nodo_cte_i_999363463 [label="CTE_I: 10"]
-nodo_asig_1173750329 -- nodo_cte_i_999363463
-nodo_asig_1173750329 [label="="]
-nodo_programa -- nodo_asig_1173750329
-nodo_var_927366868 [label="Var: b"]
-nodo_asig_1112824685 -- nodo_var_927366868
+nodo_cte_i_1083039370 [label="CTE_I: 42"]
+nodo_asig_192951839 -- nodo_cte_i_1083039370
+nodo_asig_192951839 [label="="]
+nodo_programa -- nodo_asig_192951839
+nodo_var_785575997 [label="Var: y1"]
+nodo_asig_610802273 -- nodo_var_785575997
 
-nodo_cte_i_1048811184 [label="CTE_I: 20"]
-nodo_asig_1112824685 -- nodo_cte_i_1048811184
-nodo_asig_1112824685 [label="="]
-nodo_programa -- nodo_asig_1112824685
-nodo_var_1842481701 [label="Var: c"]
-nodo_asig_230533068 -- nodo_var_1842481701
-
-nodo_cte_i_1776707989 [label="CTE_I: 123"]
-nodo_asig_230533068 -- nodo_cte_i_1776707989
-nodo_asig_230533068 [label="="]
-nodo_programa -- nodo_asig_230533068
-nodo_var_730929514 [label="Var: x"]
-nodo_asig_1265783823 -- nodo_var_730929514
-
-nodo_cte_f_1458552095 [label="CTE_F: 3.14"]
-nodo_asig_1265783823 -- nodo_cte_f_1458552095
-nodo_asig_1265783823 [label="="]
-nodo_programa -- nodo_asig_1265783823
-nodo_var_313581113 [label="Var: msg"]
-nodo_asig_1142345965 -- nodo_var_313581113
-
-nodo_cte_str_2051222887 [label="CTE_STR: 'Hola mundo'"]
-nodo_asig_1142345965 -- nodo_cte_str_2051222887
-nodo_asig_1142345965 [label="="]
-nodo_programa -- nodo_asig_1142345965
-nodo_repeat_774577936 [label="REPEAT"]
-nodo_cond_1548235648 [label="<"]
-nodo_repeat_774577936 -- nodo_cond_1548235648
-nodo_var_1209892646 [label="Var: a"]
-nodo_cond_1548235648 -- nodo_var_1209892646
-nodo_cte_i_735468375 [label="CTE_I: 12"]
-nodo_cond_1548235648 -- nodo_cte_i_735468375
-nodo_programa -- nodo_repeat_774577936
-nodo_var_1077608127 [label="Var: a"]
-nodo_asig_1567822498 -- nodo_var_1077608127
-
-nodo_expbin_1677544913 [label="+"]
-nodo_asig_1567822498 -- nodo_expbin_1677544913
-nodo_var_2053684762 [label="Var: a"]
-nodo_expbin_1677544913 -- nodo_var_2053684762
-nodo_cte_i_1061901815 [label="CTE_I: 1"]
-nodo_expbin_1677544913 -- nodo_cte_i_1061901815
-nodo_asig_1567822498 [label="="]
-nodo_repeat_774577936 -- nodo_asig_1567822498
-nodo_var_554289313 [label="Var: a"]
-nodo_show_680758183 -- nodo_var_554289313
-nodo_show_680758183 [label="SHOW"]
-nodo_repeat_774577936 -- nodo_show_680758183
+nodo_cte_f_2089959719 [label="CTE_F: 0.75"]
+nodo_asig_610802273 -- nodo_cte_f_2089959719
+nodo_asig_610802273 [label="="]
+nodo_programa -- nodo_asig_610802273
 }

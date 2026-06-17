@@ -21,6 +21,51 @@ public class NodoExpresionBinaria extends NodoExpresion {
         return "INT";
     }
 
+    public NodoExpresion getIzquierda() {
+        return izquierda;
+    }
+
+    public String getOperador() {
+        return operador;
+    }
+
+    public NodoExpresion getDerecha() {
+        return derecha;
+    }
+
+    @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        if ("STRING".equals(getTipoSemantico())) {
+            throw new UnsupportedOperationException("No se soportan operaciones aritmeticas sobre STRING");
+        }
+
+        String nombreIzquierda = izquierda.generarAssembler(asm, contexto);
+        String nombreDerecha = derecha.generarAssembler(asm, contexto);
+        String temporal = contexto.nuevoTemporal(getTipoSemantico());
+
+        asm.append("FLD ").append(nombreIzquierda).append("\n");
+
+        switch (operador) {
+            case "+":
+                asm.append("FADD ").append(nombreDerecha).append("\n");
+                break;
+            case "-":
+                asm.append("FSUB ").append(nombreDerecha).append("\n");
+                break;
+            case "*":
+                asm.append("FMUL ").append(nombreDerecha).append("\n");
+                break;
+            case "/":
+                asm.append("FDIV ").append(nombreDerecha).append("\n");
+                break;
+            default:
+                throw new UnsupportedOperationException("Operador no soportado: " + operador);
+        }
+
+        asm.append("FSTP ").append(temporal).append("\n");
+        return temporal;
+    }
+
     @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_expbin_" + System.identityHashCode(this);

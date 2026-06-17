@@ -25,4 +25,22 @@ public class NodoAsignacion extends NodoSentencia {
         }
         return resultado.toString();
     }
+
+    @Override
+    public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        try {
+            if ("STRING".equals(expresion.getTipoSemantico())) {
+                asm.append("; TODO asignacion STRING no soportada todavia: ")
+                   .append(variable.getNombre())
+                   .append("\n");
+                return;
+            }
+
+            String resultadoExpresion = expresion.generarAssembler(asm, contexto);
+            asm.append("FLD ").append(resultadoExpresion).append("\n");
+            asm.append("FSTP ").append(variable.getNombre()).append("\n");
+        } catch (UnsupportedOperationException ex) {
+            asm.append("; ").append(ex.getMessage()).append("\n");
+        }
+    }
 }

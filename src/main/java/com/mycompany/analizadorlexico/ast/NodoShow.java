@@ -19,4 +19,21 @@ public class NodoShow extends NodoSentencia {
         }
         return resultado.toString();
     }
+
+    @Override
+    public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        try {
+            if (!"STRING".equals(expresion.getTipoSemantico())) {
+                asm.append("; TODO SHOW solo soporta STRING en esta primera version\n");
+                return;
+            }
+
+            String nombre = expresion.generarAssembler(asm, contexto);
+            asm.append("MOV DX, OFFSET ").append(nombre).append("\n");
+            asm.append("MOV AH, 9\n");
+            asm.append("INT 21h\n");
+        } catch (UnsupportedOperationException ex) {
+            asm.append("; ").append(ex.getMessage()).append("\n");
+        }
+    }
 }

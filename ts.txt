@@ -1,14 +1,6 @@
 |                             NOMBRE|     TOKEN|      TIPO|                              VALOR| LEN|
 ----------------------------------------------------------------------------------------------------
-|                                  a|        ID|       INT|                                  -|    |
-|                                  b|        ID|       INT|                                  -|    |
-|                                  c|        ID|       INT|                                  -|    |
-|                                  x|        ID|     FLOAT|                                  -|    |
-|                                msg|        ID|    STRING|                                  -|    |
-|                                _10| INT_CONST|          |                                 10|    |
-|                                _20| INT_CONST|          |                                 20|    |
-|                               _123| INT_CONST|          |                                123|    |
-|                              _3.14|FLOAT_CONST|          |                               3.14|    |
-|                      _"Hola mundo"|STRING_CONST|          |                       "Hola mundo"|  12|
-|                                 _1| INT_CONST|          |                                  1|    |
-|                                _12| INT_CONST|          |                                 12|    |
+|                                  x|        ID|       INT|                                  -|    |
+|                                 y1|        ID|     FLOAT|                                  -|    |
+|                                _42| INT_CONST|          |                                 42|    |
+|                               _.75|FLOAT_CONST|          |                                .75|    |

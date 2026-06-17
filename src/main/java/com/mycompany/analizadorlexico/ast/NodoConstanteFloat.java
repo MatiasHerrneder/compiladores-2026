@@ -14,6 +14,11 @@ public class NodoConstanteFloat extends NodoExpresion {
     public String getTipoSemantico() { return "FLOAT"; }
 
     @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        return contexto.nombreConstanteFloat(valor);
+    }
+
+    @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_cte_f_" + System.identityHashCode(this);
         StringBuilder resultado = new StringBuilder();

@@ -52,4 +52,9 @@ public class NodoIf extends NodoSentencia {
 
         return resultado.toString();
     }
+
+    @Override
+    public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        asm.append("; TODO assembler para IF aun no implementado\n");
+    }
 }

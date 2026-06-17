@@ -13,8 +13,17 @@ public class NodoVariable extends NodoExpresion {
         this.tipoSemantico = tipo;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     @Override
     public String getTipoSemantico() { return tipoSemantico; }
+
+    @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        return nombre;
+    }
 
     @Override
     protected String graficar(String idPadre) {

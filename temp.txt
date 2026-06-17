@@ -1,25 +1,12 @@
 PROGRAM.SECTION
 
-/* Declaraciones de variables */
 DECVAR
-  INT a, b, c
-  FLOAT x
-  STRING msg
+INT x
+FLOAT y1
 ENDDECVAR
 
-// Inicializaciones / asignaciones
-a = 10
-b = 20
-c = 123
-x = 3.14
-msg = "Hola mundo"
-
-
-// Bucle REPEAT ... UNTIL
-REPEAT
-  a = a + 1
-  show a
-UNTIL a >= 12
-
+x = 42
+y1 = .75
 
 ENDPROGRAM.SECTION
+

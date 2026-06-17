@@ -19,6 +19,11 @@ public class NodoConstanteString extends NodoExpresion {
     public String getTipoSemantico() { return "STRING"; }
 
     @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        return contexto.nombreConstanteString(valor);
+    }
+
+    @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_cte_str_" + System.identityHashCode(this);
         StringBuilder resultado = new StringBuilder();

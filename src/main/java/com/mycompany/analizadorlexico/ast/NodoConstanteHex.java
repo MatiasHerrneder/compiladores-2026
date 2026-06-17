@@ -18,6 +18,11 @@ public class NodoConstanteHex extends NodoExpresion {
     public String getTipoSemantico() { return "INT"; }
 
     @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        return contexto.nombreConstanteHex(valorHex);
+    }
+
+    @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_cte_hex_" + System.identityHashCode(this);
         StringBuilder resultado = new StringBuilder();

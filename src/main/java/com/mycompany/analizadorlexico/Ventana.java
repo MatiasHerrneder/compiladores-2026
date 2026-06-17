@@ -220,12 +220,26 @@ public class Ventana extends javax.swing.JFrame {
                 java_cup.runtime.Symbol resultado = p.parse();
                 NodoPrograma arbol = (NodoPrograma) resultado.value;
 
-                if (arbol != null) {
-                    String dot = arbol.graficar();
-                    mostrarTextoEnVentana("Árbol Sintáctico (DOT)", dot);
+                    if (arbol != null) {
+                        arbol.setTablaSimbolos(lexico.symtbl);
 
-                    // Guardar el .dot
-                    java.nio.file.Files.write(
+                        String dot = arbol.graficar();
+                        mostrarTextoEnVentana("Árbol Sintáctico (DOT)", dot);
+
+                        try {
+                            String assembler = arbol.generaAssembler();
+                            java.nio.file.Files.writeString(
+                                java.nio.file.Path.of("assembler.asm"),
+                                assembler,
+                                StandardCharsets.UTF_8
+                            );
+                            mostrarTextoEnVentana("Assembler generado", assembler);
+                        } catch (Exception e) {
+                            txtAreaOutput.append("\n[ERROR ASM] " + e.getMessage() + "\n");
+                        }
+
+                        // Guardar el .dot
+                        java.nio.file.Files.write(
                         java.nio.file.Path.of("arbol.dot"),
                         dot.getBytes()
                     );

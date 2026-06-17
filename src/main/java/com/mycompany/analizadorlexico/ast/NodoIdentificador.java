@@ -13,6 +13,15 @@ public class NodoIdentificador extends NodoExpresion {
         return "ID";
     }
 
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        return identificador;
+    }
+
     @Override
     public String getDescripcionNodo() {
         return "ID: " + identificador;
