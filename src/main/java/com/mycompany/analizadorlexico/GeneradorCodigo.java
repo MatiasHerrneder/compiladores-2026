@@ -4,12 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.mycompany.analizadorlexico.ast.*;
 
 public class GeneradorCodigo {
     private NodoPrograma ast;
-    private TablaSimbolos tablaSimbolos; // Reemplazá por el tipo real de tu symtbl
+    private TablaSimbolos tablaSimbolos; 
     private int contadorAuxiliares = 0;
 
     public GeneradorCodigo(NodoPrograma ast, TablaSimbolos tablaSimbolos) {
@@ -24,16 +26,15 @@ public class GeneradorCodigo {
             java.io.StringWriter swCode = new java.io.StringWriter();
             PrintWriter pwCode = new PrintWriter(swCode);
 
-            // El recorrido del AST va a llenar 'contadorAuxiliares' 
-            // y el Set de constantes en caliente de forma exacta
+            // El recorrido del AST va a llenar 'contadorAuxiliares'
             this.ast.generarASM(pwCode, this); 
 
             // 2. Volcado del archivo final estructurado
-            pw.println("include macros2.asm\t; Inclusión de macros");
-            pw.println("include number.asm\t; Inclusión de macros");
-            pw.println(".MODEL LARGE");
-            pw.println(".386");
-            pw.println("STACK 200h");
+            pw.println("include macros2.asm\t; Inclusión de macros de la cátedra");
+            pw.println("include number.asm\t; Inclusión de macros de la cátedra");
+            pw.println(".MODEL LARGE\t\t; Modelo de Memoria");
+            pw.println(".386\t\t\t; Tipo de Procesador");
+            pw.println("STACK 200h\t\t; Bytes en el Stack");
             pw.println();
 
             // =================================================================
@@ -41,43 +42,73 @@ public class GeneradorCodigo {
             // =================================================================
             pw.println(".DATA");
             
+            // Set para evitar duplicados en la impresión de constantes en .DATA
+            Set<String> idsDeclarados = new HashSet<>();
+
             // Recorremos la estructura interna de tu tabla de símbolos real
             for (Map<COLUMNA, String> fila : this.tablaSimbolos.getSymtabla()) {
                 String nombre = fila.get(COLUMNA.NOMBRE);
                 String token = fila.get(COLUMNA.TOKEN);
                 String valor = fila.get(COLUMNA.VALOR);
-                String tipo = fila.get(COLUMNA.TIPO);
 
                 if (nombre == null) continue;
 
                 // CASO A: Es una variable declarada por el usuario (Token es "ID")
                 if ("ID".equals(token)) {
-                    pw.println("  _" + nombre.toLowerCase() + " \tdd \t?");
+                    String idVariable = "_" + nombre.toLowerCase();
+                    if (!idsDeclarados.contains(idVariable)) {
+                        pw.println("  " + idVariable + " \tdd \t?");
+                        idsDeclarados.add(idVariable);
+                    }
                 } 
                 
-                // CASO B: Es una constante (Por ejemplo "INT_CONST", "FLOAT_CONST", etc.)
-                else if (token != null && token.contains("CONST")) {
-                    // Si el valor viene vacío, usamos el nombre como fallback
+                // CASO B: Es una constante de tipo STRING
+                else if ("STRING_CONST".equals(token)) {
                     String valConst = (valor != null && !valor.isEmpty()) ? valor : nombre;
                     
-                    // Adecuamos el formato para flotantes en assembler (intel exige punto decimal)
+                    // 1. Quitamos comillas y pasamos a minúscula
+                    String textoBase = valConst.replace("\"", "").toLowerCase().trim();
+                    
+                    // 2. Reemplazamos espacios, tildes y caracteres raros por UN SOLO guion bajo
+                    String idAsm = "_" + textoBase.replaceAll("[áéíóúÁÉÍÓÚñÑ]", "n") // evita la ? de la ó
+                                                .replaceAll("[^a-z0-9_]", "_")
+                                                .replaceAll("_+", "_");
+                    
+                    // 3. Si termina en guion bajo se lo removemos
+                    if (idAsm.endsWith("_") && idAsm.length() > 1) {
+                        idAsm = idAsm.substring(0, idAsm.length() - 1);
+                    }
+                    
+                    if (!idsDeclarados.contains(idAsm)) {
+                        pw.println("  " + idAsm + " \tdb \t\"" + textoBase + "\", '$'");
+                        idsDeclarados.add(idAsm);
+                    }
+                }
+
+                // CASO C: Es una constante numérica (INT_CONST, FLOAT_CONST, HEX_CONST)
+                else if (token != null && token.contains("CONST")) {
+                    String valConst = (valor != null && !valor.isEmpty()) ? valor : nombre;
+                    
+                    // Adecuamos el formato para flotantes en assembler (Intel exige punto decimal)
                     String formatoVal = valConst.contains(".") ? valConst : valConst + ".0";
                     
-                    // Creamos el identificador reemplazando posibles puntos por guiones bajos (ej: _1_25)
+                    // El identificador no debe llevar puntos en el nombre
                     String idAsm = "_" + valConst.replace(".", "_");
                     
-                    pw.println("  " + idAsm + " \tdd \t" + formatoVal);
+                    if (!idsDeclarados.contains(idAsm)) {
+                        pw.println("  " + idAsm + " \tdd \t" + formatoVal);
+                        idsDeclarados.add(idAsm);
+                    }
                 }
             }
             
-            // Registramos manualmente las variables fijas emuladas para #Iguales
-            pw.println("  _comparador \tdd \t?");
-            pw.println("  _contador   \tdd \t?");
+            // Registramos de manera segura las variables fijas emuladas para #Iguales
+            if (!idsDeclarados.contains("_comparador")) pw.println("  _comparador \tdd \t?");
+            if (!idsDeclarados.contains("_contador"))   pw.println("  _contador   \tdd \t?");
             
-            // CASO C: Constantes de control por si las moscas (0 y 1 para #Iguales)
-            // Esto previene fallas si el usuario no las tipeó directamente en su código
-            pw.println("  _0          \tdd \t0.0");
-            pw.println("  _1          \tdd \t1.0");
+            // Constantes de control por defecto para la lógica interna (0 y 1)
+            if (!idsDeclarados.contains("_0")) pw.println("  _0          \tdd \t0.0");
+            if (!idsDeclarados.contains("_1")) pw.println("  _1          \tdd \t1.0");
 
             // D. Declarar exactamente la cantidad de auxiliares calculados en el recorrido
             for (int i = 1; i <= this.contadorAuxiliares; i++) {
@@ -89,7 +120,7 @@ public class GeneradorCodigo {
             // Sección .CODE
             pw.println(".CODE");
             pw.println("START:");
-            pw.println("  mov AX, @DATA");
+            pw.println("  mov AX, @DATA\t\t; Inicializa el segmento de datos");
             pw.println("  mov DS, AX");
             pw.println("  mov ES, AX");
             pw.println();
@@ -97,9 +128,9 @@ public class GeneradorCodigo {
             // Volcamos las instrucciones generadas por los nodos
             pw.print(swCode.toString());
 
-            // Cierre
+            // Cierre estándar del programa
             pw.println();
-            pw.println("  mov ax, 4c00h");
+            pw.println("  mov ax, 4c00h\t\t; Finaliza la ejecucion");
             pw.println("  int 21h");
             pw.println("END START");
 

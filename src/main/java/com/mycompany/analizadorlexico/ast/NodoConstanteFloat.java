@@ -19,8 +19,8 @@ public class NodoConstanteFloat extends NodoExpresion {
 
     @Override
     public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
-        // Las constantes se mapean en la Tabla de Símbolos con prefijo
-        return "_" + this.valor; // Ejemplo: devuelve "_20"
+        // Convierte el float a String y reemplaza el punto por un guion bajo (ej: _3_14)
+        return "_" + String.valueOf(this.valor).replace(".", "_");
     }
 
     @Override

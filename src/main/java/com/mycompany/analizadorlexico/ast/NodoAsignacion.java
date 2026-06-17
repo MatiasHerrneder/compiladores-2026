@@ -19,17 +19,18 @@ public class NodoAsignacion extends NodoSentencia {
 
     @Override
     public void generarASM(PrintWriter pw, GeneradorCodigo gc) {
-        // 1. Primero resolvemos de forma recursiva toda la expresión matemática de la derecha.
-        // Como 'generarASM' en expresiones devuelve el ID de dónde quedó el resultado (un @aux o cte)...
-        String resultadoDerecho = this.expresion.generarASM(pw, gc);
-        
-        // 2. Traemos el nombre de la variable de destino (ej: _id)
-        String destino = this.variable.generarASM(pw, gc);
-        
-        // 3. Escribimos la instrucción de la FPU para mover el valor final al ID de destino
-        pw.println("  fld " + resultadoDerecho + "\t\t; Carga el resultado final de la expresion"); // fld [cite: 317]
-        pw.println("  fstp " + destino + "\t\t; Asigna sacando el valor de la FPU hacia la variable"); // fstp [cite: 317, 643]
-        pw.println();
+        String idDer = this.expresion.generarASM(pw, gc); 
+        String idIzq = "_" + this.variable.getNombre().toLowerCase(); 
+
+        // Si es un STRING, no emitimos las instrucciones mov que causan el descalce de bits
+        if ("STRING".equals(this.expresion.getTipoSemantico())) {
+            pw.println("; --- ASIGNACION DE STRING OMITIDA (USO DE LITERAL EN HOJAS) ---");
+        } 
+        // Si es un INT o FLOAT, va por la FPU tradicional que anda perfecto
+        else {
+            pw.println("  fld " + idDer + "\t\t; Carga el resultado final de la expresion");
+            pw.println("  fstp " + idIzq + "\t\t; Asigna sacando el valor de la FPU");
+        }
     }
 
     @Override

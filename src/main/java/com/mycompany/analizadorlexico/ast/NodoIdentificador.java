@@ -1,5 +1,7 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
 import com.mycompany.analizadorlexico.GeneradorCodigo;
 
 public class NodoIdentificador extends NodoExpresion {
@@ -21,8 +23,8 @@ public class NodoIdentificador extends NodoExpresion {
     }
 
     @Override
-    public String generarASM(java.io.PrintWriter pw, GeneradorCodigo gc) {
-        // Retorna el identificador con el prefijo estandar para el archivo .asm
-        return "_" + this.identificador;
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Asegura que devuelva el ID en minúsculas (ej: _msg, _a)
+        return "_" + this.identificador.toLowerCase();
     }
 }

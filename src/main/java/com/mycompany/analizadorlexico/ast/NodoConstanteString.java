@@ -24,8 +24,17 @@ public class NodoConstanteString extends NodoExpresion {
 
     @Override
     public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
-        // Las constantes se mapean en la Tabla de Símbolos con prefijo
-        return "_" + this.valor; // Ejemplo: devuelve "_20"
+        String textoBase = this.valor.replace("\"", "").toLowerCase().trim();
+        
+        String idLimpio = "_" + textoBase.replaceAll("[áéíóúÁÉÍÓÚñÑ]", "n")
+                                        .replaceAll("[^a-z0-9_]", "_")
+                                        .replaceAll("_+", "_");
+        
+        if (idLimpio.endsWith("_") && idLimpio.length() > 1) {
+            idLimpio = idLimpio.substring(0, idLimpio.length() - 1);
+        }
+        
+        return idLimpio;
     }
 
     @Override

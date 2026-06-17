@@ -13,6 +13,10 @@ public class NodoVariable extends NodoExpresion {
         this.nombre = nombre;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void setTipoSemantico(String tipo) {
         this.tipoSemantico = tipo;
     }
@@ -22,8 +26,8 @@ public class NodoVariable extends NodoExpresion {
 
     @Override
     public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
-        // Retorna el ID con el prefijo/sufijo para evitar conflictos en Assembler
-        return "_" + this.nombre; // Ejemplo: devuelve "_a" [cite: 125]
+        // Asegura que devuelva el ID en minúsculas (ej: _msg, _a)
+        return "_" + this.nombre.toLowerCase();
     }
 
     @Override

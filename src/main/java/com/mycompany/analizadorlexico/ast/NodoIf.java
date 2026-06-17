@@ -28,7 +28,7 @@ public class NodoIf extends NodoSentencia {
         
         // 2. Procesamos la condicion. Asumimos que NodoCondicion genera los FCOM/SAHF 
         // y nos retorna el salto que debemos dar si la condicion es FALSA.
-        // Ejemplo: Si la condicion es (a > b), el salto falso seria JNA[cite: 760].
+        // Ejemplo: Si la condicion es (a > b), el salto falso seria JNA.
         String saltoFalso = this.condicion.generarSaltoFalso(pw, gc); 
         
         // Saltamos al bloque Else si la condicion no se cumple
@@ -40,9 +40,9 @@ public class NodoIf extends NodoSentencia {
             sentencia.generarASM(pw, gc);
         }
 
-        // Si entramos al THEN, al terminar debemos esquivar el ELSE con un salto incondicional [cite: 393]
+        // Si entramos al THEN, al terminar debemos esquivar el ELSE con un salto incondicional
         if (this.sentenciasElse != null) {
-            pw.println("  jmp " + etiquetaFinal); // [cite: 393]
+            pw.println("  jmp " + etiquetaFinal);
         }
 
         // 4. Estampamos el inicio del bloque ELSE
