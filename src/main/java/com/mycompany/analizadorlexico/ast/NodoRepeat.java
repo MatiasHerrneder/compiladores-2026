@@ -39,6 +39,18 @@ public class NodoRepeat extends NodoSentencia {
         pw.println();
     }
 
+    public String invertirSaltoRepeat(String salto) {
+        switch (salto) {
+            case "je": return "jne";
+            case "jne": return "je";
+            case "jg": return "jle";
+            case "jge": return "jl";
+            case "jl": return "jge";
+            case "jle": return "jg";
+            default: return salto; // Para otros saltos, no hacemos inversión
+        }
+    }
+
     @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_repeat_" + System.identityHashCode(this);

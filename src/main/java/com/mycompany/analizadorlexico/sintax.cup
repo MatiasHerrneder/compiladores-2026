@@ -281,9 +281,7 @@ escritura_sin_var ::=
     | SHOW HEX_CONST:v
       {:
           System.out.println("Regla escritura_sin_var: SHOW HEX_CONST");
-          String hex = v.toString().substring(2); // saca el "0h"
-          int decimal = Integer.parseInt(hex, 16);
-          RESULT = new NodoShow(new NodoConstanteHex(hex, decimal));
+          RESULT = new NodoShow(new NodoConstanteHex(Integer.parseInt(v.toString())));
       :}
     ;
 
@@ -375,9 +373,7 @@ factor ::=
     | HEX_CONST:v
       {:
           System.out.println("Regla factor: HEX_CONST");
-          String hex = v.toString().substring(2); // saca el "0h"
-          int decimal = Integer.parseInt(hex, 16);
-          RESULT = new NodoConstanteHex(hex, decimal);
+          RESULT = new NodoConstanteHex(Integer.parseInt(v.toString()));
       :}
     | LPAREN expresion:e RPAREN
       {:

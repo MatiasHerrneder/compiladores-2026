@@ -109,8 +109,8 @@ public class NodoCondicion extends Nodo {
             switch (this.operador) {
                 case "==": return "jne";  // Si pide igual, salta si es Distinto
                 case "!=": return "je";   // Si pide distinto, salta si es Igual
-                case ">":  return "jna";  // Si pide mayor, salta si es Menor o Igual
-                case ">=": return "jnbe"; // Si pide mayor o igual, salta si es Menor
+                case ">":  return "jbe";  // Si pide mayor, salta si es Menor o Igual
+                case ">=": return "jb";   // Si pide mayor o igual, salta si es Menor
                 case "<":  return "jae";  // Si pide menor, salta si es Mayor o Igual
                 case "<=": return "ja";   // Si pide menor o igual, salta si es Mayor
                 default:   return "jmp";

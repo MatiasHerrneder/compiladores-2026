@@ -814,9 +814,7 @@ class CUP$parser$actions {
 		Object v = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
           System.out.println("Regla escritura_sin_var: SHOW HEX_CONST");
-          String hex = v.toString().substring(2); // saca el "0h"
-          int decimal = Integer.parseInt(hex, 16);
-          RESULT = new NodoShow(new NodoConstanteHex(hex, decimal));
+          RESULT = new NodoShow(new NodoConstanteHex(Integer.parseInt(v.toString())));
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("escritura_sin_var",12, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1124,9 +1122,7 @@ class CUP$parser$actions {
 		Object v = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
           System.out.println("Regla factor: HEX_CONST");
-          String hex = v.toString().substring(2); // saca el "0h"
-          int decimal = Integer.parseInt(hex, 16);
-          RESULT = new NodoConstanteHex(hex, decimal);
+          RESULT = new NodoConstanteHex(Integer.parseInt(v.toString()));
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("factor",18, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

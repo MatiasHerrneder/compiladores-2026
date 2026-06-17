@@ -1,183 +1,225 @@
 graph G {nodo_programa [label="Programa"]
-nodo_var_1121951943 [label="Var: a"]
-nodo_asig_1163232620 -- nodo_var_1121951943
+nodo_var_203944670 [label="Var: a"]
+nodo_asig_842491416 -- nodo_var_203944670
 
-nodo_cte_i_303262806 [label="CTE_I: 10"]
-nodo_asig_1163232620 -- nodo_cte_i_303262806
-nodo_asig_1163232620 [label="="]
-nodo_programa -- nodo_asig_1163232620
-nodo_var_119890696 [label="Var: b"]
-nodo_asig_1848829255 -- nodo_var_119890696
+nodo_cte_i_677306938 [label="CTE_I: 10"]
+nodo_asig_842491416 -- nodo_cte_i_677306938
+nodo_asig_842491416 [label="="]
+nodo_programa -- nodo_asig_842491416
+nodo_var_1475878261 [label="Var: b"]
+nodo_asig_1593227029 -- nodo_var_1475878261
 
-nodo_cte_i_943927987 [label="CTE_I: 20"]
-nodo_asig_1848829255 -- nodo_cte_i_943927987
-nodo_asig_1848829255 [label="="]
-nodo_programa -- nodo_asig_1848829255
-nodo_var_1213881228 [label="Var: c"]
-nodo_asig_825989169 -- nodo_var_1213881228
+nodo_cte_i_1685759062 [label="CTE_I: 20"]
+nodo_asig_1593227029 -- nodo_cte_i_1685759062
+nodo_asig_1593227029 [label="="]
+nodo_programa -- nodo_asig_1593227029
+nodo_var_1347392422 [label="Var: c"]
+nodo_asig_1005245905 -- nodo_var_1347392422
 
-nodo_cte_i_1691045036 [label="CTE_I: 123"]
-nodo_asig_825989169 -- nodo_cte_i_1691045036
-nodo_asig_825989169 [label="="]
-nodo_programa -- nodo_asig_825989169
-nodo_var_673963690 [label="Var: x"]
-nodo_asig_1161571372 -- nodo_var_673963690
+nodo_cte_i_1204502383 [label="CTE_I: 123"]
+nodo_asig_1005245905 -- nodo_cte_i_1204502383
+nodo_asig_1005245905 [label="="]
+nodo_programa -- nodo_asig_1005245905
+nodo_var_462126236 [label="Var: x"]
+nodo_asig_1981967316 -- nodo_var_462126236
 
-nodo_cte_f_842491416 [label="CTE_F: 3.14"]
-nodo_asig_1161571372 -- nodo_cte_f_842491416
-nodo_asig_1161571372 [label="="]
-nodo_programa -- nodo_asig_1161571372
-nodo_var_1685759062 [label="Var: z"]
-nodo_asig_1475878261 -- nodo_var_1685759062
+nodo_cte_f_930422504 [label="CTE_F: 3.14"]
+nodo_asig_1981967316 -- nodo_cte_f_930422504
+nodo_asig_1981967316 [label="="]
+nodo_programa -- nodo_asig_1981967316
+nodo_var_1629537782 [label="Var: z"]
+nodo_asig_334559913 -- nodo_var_1629537782
 
-nodo_cte_hex_1005245905 [label="HEX: 0h5 (5)"]
-nodo_asig_1475878261 -- nodo_cte_hex_1005245905
-nodo_asig_1475878261 [label="="]
-nodo_programa -- nodo_asig_1475878261
-nodo_var_166493455 [label="Var: msg"]
-nodo_asig_1799733441 -- nodo_var_166493455
+nodo_cte_hex_1003552325 [label="HEX: 0hAE2 (2786)"]
+nodo_asig_334559913 -- nodo_cte_hex_1003552325
+nodo_asig_334559913 [label="="]
+nodo_programa -- nodo_asig_334559913
+nodo_var_1776439658 [label="Var: msg"]
+nodo_asig_1431675409 -- nodo_var_1776439658
 
-nodo_cte_str_1326911974 [label="CTE_STR: 'Hola mundo'"]
-nodo_asig_1799733441 -- nodo_cte_str_1326911974
-nodo_asig_1799733441 [label="="]
-nodo_programa -- nodo_asig_1799733441
-nodo_1110450997 [label="IF"]
-nodo_programa -- nodo_1110450997
-nodo_cond_129413242 [label="=="]
-nodo_1110450997 -- nodo_cond_129413242
-nodo_var_1834529158 [label="Var: a"]
-nodo_cond_129413242 -- nodo_var_1834529158
-nodo_var_448206314 [label="Var: b"]
-nodo_cond_129413242 -- nodo_var_448206314
-nodo_1507697666 [label="Then"]
-nodo_1110450997 -- nodo_1507697666
-nodo_cte_str_1134998095 [label="CTE_STR: 'a y b son iguales'"]
-nodo_show_1801120291 -- nodo_cte_str_1134998095
-nodo_show_1801120291 [label="SHOW"]
-nodo_1507697666 -- nodo_show_1801120291
-nodo_1637672852 [label="Else"]
-nodo_1110450997 -- nodo_1637672852
-nodo_var_530625235 [label="Var: comparador"]
-nodo_asig_1776439658 -- nodo_var_530625235
-
-nodo_var_428230388 [label="Var: a"]
-nodo_asig_1776439658 -- nodo_var_428230388
-nodo_asig_1776439658 [label="="]
-nodo_programa -- nodo_asig_1776439658
-nodo_var_447307443 [label="Var: contador"]
-nodo_asig_1631267583 -- nodo_var_447307443
-
-nodo_cte_i_344351 [label="CTE_I: 0"]
-nodo_asig_1631267583 -- nodo_cte_i_344351
-nodo_asig_1631267583 [label="="]
-nodo_programa -- nodo_asig_1631267583
-nodo_731842061 [label="IF"]
-nodo_programa -- nodo_731842061
-nodo_cond_332115283 [label="=="]
-nodo_731842061 -- nodo_cond_332115283
-nodo_var_1137124703 [label="Var: comparador"]
-nodo_cond_332115283 -- nodo_var_1137124703
-nodo_var_1767934337 [label="Var: b"]
-nodo_cond_332115283 -- nodo_var_1767934337
-nodo_983320014 [label="Then"]
-nodo_731842061 -- nodo_983320014
-nodo_var_249886951 [label="Var: contador"]
+nodo_cte_str_530625235 [label="CTE_STR: 'Hola mundo'"]
+nodo_asig_1431675409 -- nodo_cte_str_530625235
+nodo_asig_1431675409 [label="="]
+nodo_programa -- nodo_asig_1431675409
+nodo_428230388 [label="IF"]
+nodo_programa -- nodo_428230388
+nodo_cond_1631267583 [label="=="]
+nodo_428230388 -- nodo_cond_1631267583
+nodo_var_447307443 [label="Var: a"]
+nodo_cond_1631267583 -- nodo_var_447307443
+nodo_var_344351 [label="Var: b"]
+nodo_cond_1631267583 -- nodo_var_344351
+nodo_731842061 [label="Then"]
+nodo_428230388 -- nodo_731842061
+nodo_cte_str_1137124703 [label="CTE_STR: 'a y b son iguales'"]
+nodo_show_332115283 -- nodo_cte_str_1137124703
+nodo_show_332115283 [label="SHOW"]
+nodo_731842061 -- nodo_show_332115283
+nodo_1767934337 [label="Else"]
+nodo_428230388 -- nodo_1767934337
+nodo_var_249886951 [label="Var: comparador"]
 nodo_asig_1962137339 -- nodo_var_249886951
 
-nodo_expbin_1671779387 [label="+"]
-nodo_asig_1962137339 -- nodo_expbin_1671779387
-nodo_var_1003478964 [label="Var: contador"]
-nodo_expbin_1671779387 -- nodo_var_1003478964
-nodo_cte_i_1373733432 [label="CTE_I: 1"]
-nodo_expbin_1671779387 -- nodo_cte_i_1373733432
+nodo_var_1671779387 [label="Var: a"]
+nodo_asig_1962137339 -- nodo_var_1671779387
 nodo_asig_1962137339 [label="="]
-nodo_983320014 -- nodo_asig_1962137339
-nodo_2028698403 [label="IF"]
-nodo_programa -- nodo_2028698403
-nodo_cond_833023113 [label="=="]
-nodo_2028698403 -- nodo_cond_833023113
-nodo_var_1951512438 [label="Var: comparador"]
-nodo_cond_833023113 -- nodo_var_1951512438
-nodo_var_695995270 [label="Var: c"]
-nodo_cond_833023113 -- nodo_var_695995270
-nodo_183324649 [label="Then"]
-nodo_2028698403 -- nodo_183324649
-nodo_var_1975178365 [label="Var: contador"]
-nodo_asig_212412569 -- nodo_var_1975178365
+nodo_programa -- nodo_asig_1962137339
+nodo_var_1373733432 [label="Var: contador"]
+nodo_asig_1003478964 -- nodo_var_1373733432
 
-nodo_expbin_1020510583 [label="+"]
-nodo_asig_212412569 -- nodo_expbin_1020510583
-nodo_var_1545687811 [label="Var: contador"]
-nodo_expbin_1020510583 -- nodo_var_1545687811
-nodo_cte_i_420042238 [label="CTE_I: 1"]
-nodo_expbin_1020510583 -- nodo_cte_i_420042238
-nodo_asig_212412569 [label="="]
-nodo_183324649 -- nodo_asig_212412569
-nodo_var_984834974 [label="Var: contador"]
-nodo_show_1431675409 -- nodo_var_984834974
-nodo_show_1431675409 [label="SHOW"]
-nodo_1637672852 -- nodo_show_1431675409
+nodo_cte_i_2028698403 [label="CTE_I: 0"]
+nodo_asig_1003478964 -- nodo_cte_i_2028698403
+nodo_asig_1003478964 [label="="]
+nodo_programa -- nodo_asig_1003478964
+nodo_833023113 [label="IF"]
+nodo_programa -- nodo_833023113
+nodo_cond_1951512438 [label="=="]
+nodo_833023113 -- nodo_cond_1951512438
+nodo_var_695995270 [label="Var: comparador"]
+nodo_cond_1951512438 -- nodo_var_695995270
+nodo_var_183324649 [label="Var: a"]
+nodo_cond_1951512438 -- nodo_var_183324649
+nodo_212412569 [label="Then"]
+nodo_833023113 -- nodo_212412569
+nodo_var_1020510583 [label="Var: contador"]
+nodo_asig_1975178365 -- nodo_var_1020510583
+
+nodo_expbin_1545687811 [label="+"]
+nodo_asig_1975178365 -- nodo_expbin_1545687811
+nodo_var_420042238 [label="Var: contador"]
+nodo_expbin_1545687811 -- nodo_var_420042238
+nodo_cte_i_984834974 [label="CTE_I: 1"]
+nodo_expbin_1545687811 -- nodo_cte_i_984834974
+nodo_asig_1975178365 [label="="]
+nodo_212412569 -- nodo_asig_1975178365
 nodo_415876550 [label="IF"]
 nodo_programa -- nodo_415876550
-nodo_cond_1311122583 [label="AND"]
+nodo_cond_1311122583 [label="=="]
 nodo_415876550 -- nodo_cond_1311122583
-nodo_cond_491994632 [label="NOT"]
-nodo_cond_1311122583 -- nodo_cond_491994632
-nodo_cond_1012728239 [label="=="]
-nodo_cond_491994632 -- nodo_cond_1012728239
-nodo_var_1785463831 [label="Var: a"]
-nodo_cond_1012728239 -- nodo_var_1785463831
-nodo_var_361862993 [label="Var: b"]
-nodo_cond_1012728239 -- nodo_var_361862993
-nodo_cond_297162901 [label=">"]
-nodo_cond_1311122583 -- nodo_cond_297162901
-nodo_var_1169322869 [label="Var: x"]
-nodo_cond_297162901 -- nodo_var_1169322869
-nodo_cte_f_1341426536 [label="CTE_F: 2.0"]
-nodo_cond_297162901 -- nodo_cte_f_1341426536
-nodo_1455863512 [label="Then"]
-nodo_415876550 -- nodo_1455863512
-nodo_cte_str_602460777 [label="CTE_STR: 'Condición compuesta verdadera'"]
-nodo_show_1964457573 -- nodo_cte_str_602460777
-nodo_show_1964457573 [label="SHOW"]
-nodo_1455863512 -- nodo_show_1964457573
-nodo_var_733981964 [label="Var: z"]
-nodo_show_1219277495 -- nodo_var_733981964
-nodo_show_1219277495 [label="SHOW"]
-nodo_programa -- nodo_show_1219277495
-nodo_expbin_34191129 [label="+"]
-nodo_show_1729579528 -- nodo_expbin_34191129
-nodo_var_798856421 [label="Var: a"]
-nodo_expbin_34191129 -- nodo_var_798856421
-nodo_var_2031913943 [label="Var: b"]
-nodo_expbin_34191129 -- nodo_var_2031913943
-nodo_show_1729579528 [label="SHOW"]
-nodo_programa -- nodo_show_1729579528
-nodo_repeat_604424694 [label="REPEAT"]
-nodo_cond_1803027216 [label="<"]
-nodo_repeat_604424694 -- nodo_cond_1803027216
-nodo_var_679581734 [label="Var: a"]
-nodo_cond_1803027216 -- nodo_var_679581734
-nodo_cte_i_895413458 [label="CTE_I: 12"]
-nodo_cond_1803027216 -- nodo_cte_i_895413458
-nodo_programa -- nodo_repeat_604424694
-nodo_var_206454149 [label="Var: a"]
-nodo_asig_654691062 -- nodo_var_206454149
+nodo_var_491994632 [label="Var: comparador"]
+nodo_cond_1311122583 -- nodo_var_491994632
+nodo_var_1012728239 [label="Var: a"]
+nodo_cond_1311122583 -- nodo_var_1012728239
+nodo_1785463831 [label="Then"]
+nodo_415876550 -- nodo_1785463831
+nodo_var_297162901 [label="Var: contador"]
+nodo_asig_361862993 -- nodo_var_297162901
 
-nodo_expbin_673891458 [label="+"]
-nodo_asig_654691062 -- nodo_expbin_673891458
-nodo_var_1783665961 [label="Var: a"]
-nodo_expbin_673891458 -- nodo_var_1783665961
-nodo_cte_i_1670095087 [label="CTE_I: 1"]
-nodo_expbin_673891458 -- nodo_cte_i_1670095087
-nodo_asig_654691062 [label="="]
-nodo_repeat_604424694 -- nodo_asig_654691062
-nodo_var_1613025922 [label="Var: a"]
-nodo_show_517217038 -- nodo_var_1613025922
-nodo_show_517217038 [label="SHOW"]
-nodo_repeat_604424694 -- nodo_show_517217038
-nodo_var_805416851 [label="Var: msg"]
-nodo_show_246676082 -- nodo_var_805416851
-nodo_show_246676082 [label="SHOW"]
-nodo_programa -- nodo_show_246676082
+nodo_expbin_1169322869 [label="+"]
+nodo_asig_361862993 -- nodo_expbin_1169322869
+nodo_var_1341426536 [label="Var: contador"]
+nodo_expbin_1169322869 -- nodo_var_1341426536
+nodo_cte_i_1455863512 [label="CTE_I: 1"]
+nodo_expbin_1169322869 -- nodo_cte_i_1455863512
+nodo_asig_361862993 [label="="]
+nodo_1785463831 -- nodo_asig_361862993
+nodo_1964457573 [label="IF"]
+nodo_programa -- nodo_1964457573
+nodo_cond_602460777 [label="=="]
+nodo_1964457573 -- nodo_cond_602460777
+nodo_var_1219277495 [label="Var: comparador"]
+nodo_cond_602460777 -- nodo_var_1219277495
+nodo_cte_i_733981964 [label="CTE_I: 10"]
+nodo_cond_602460777 -- nodo_cte_i_733981964
+nodo_1729579528 [label="Then"]
+nodo_1964457573 -- nodo_1729579528
+nodo_var_798856421 [label="Var: contador"]
+nodo_asig_34191129 -- nodo_var_798856421
+
+nodo_expbin_2031913943 [label="+"]
+nodo_asig_34191129 -- nodo_expbin_2031913943
+nodo_var_604424694 [label="Var: contador"]
+nodo_expbin_2031913943 -- nodo_var_604424694
+nodo_cte_i_1803027216 [label="CTE_I: 1"]
+nodo_expbin_2031913943 -- nodo_cte_i_1803027216
+nodo_asig_34191129 [label="="]
+nodo_1729579528 -- nodo_asig_34191129
+nodo_679581734 [label="IF"]
+nodo_programa -- nodo_679581734
+nodo_cond_895413458 [label="=="]
+nodo_679581734 -- nodo_cond_895413458
+nodo_var_654691062 [label="Var: comparador"]
+nodo_cond_895413458 -- nodo_var_654691062
+nodo_expbin_206454149 [label="+"]
+nodo_cond_895413458 -- nodo_expbin_206454149
+nodo_cte_i_673891458 [label="CTE_I: 5"]
+nodo_expbin_206454149 -- nodo_cte_i_673891458
+nodo_cte_i_1783665961 [label="CTE_I: 5"]
+nodo_expbin_206454149 -- nodo_cte_i_1783665961
+nodo_1670095087 [label="Then"]
+nodo_679581734 -- nodo_1670095087
+nodo_var_1613025922 [label="Var: contador"]
+nodo_asig_517217038 -- nodo_var_1613025922
+
+nodo_expbin_246676082 [label="+"]
+nodo_asig_517217038 -- nodo_expbin_246676082
+nodo_var_805416851 [label="Var: contador"]
+nodo_expbin_246676082 -- nodo_var_805416851
+nodo_cte_i_238276342 [label="CTE_I: 1"]
+nodo_expbin_246676082 -- nodo_cte_i_238276342
+nodo_asig_517217038 [label="="]
+nodo_1670095087 -- nodo_asig_517217038
+nodo_var_1220918640 [label="Var: contador"]
+nodo_show_983320014 -- nodo_var_1220918640
+nodo_show_983320014 [label="SHOW"]
+nodo_1767934337 -- nodo_show_983320014
+nodo_1496628848 [label="IF"]
+nodo_programa -- nodo_1496628848
+nodo_cond_1685385202 [label="AND"]
+nodo_1496628848 -- nodo_cond_1685385202
+nodo_cond_1956694516 [label="NOT"]
+nodo_cond_1685385202 -- nodo_cond_1956694516
+nodo_cond_300667949 [label="=="]
+nodo_cond_1956694516 -- nodo_cond_300667949
+nodo_var_1833971550 [label="Var: a"]
+nodo_cond_300667949 -- nodo_var_1833971550
+nodo_var_773346937 [label="Var: b"]
+nodo_cond_300667949 -- nodo_var_773346937
+nodo_cond_1552274727 [label=">"]
+nodo_cond_1685385202 -- nodo_cond_1552274727
+nodo_var_327165990 [label="Var: x"]
+nodo_cond_1552274727 -- nodo_var_327165990
+nodo_cte_f_2135351255 [label="CTE_F: 2.0"]
+nodo_cond_1552274727 -- nodo_cte_f_2135351255
+nodo_318895576 [label="Then"]
+nodo_1496628848 -- nodo_318895576
+nodo_cte_str_1938613095 [label="CTE_STR: 'Condicion compuesta verdadera'"]
+nodo_show_1633629810 -- nodo_cte_str_1938613095
+nodo_show_1633629810 [label="SHOW"]
+nodo_318895576 -- nodo_show_1633629810
+nodo_var_642694932 [label="Var: z"]
+nodo_show_989672102 -- nodo_var_642694932
+nodo_show_989672102 [label="SHOW"]
+nodo_programa -- nodo_show_989672102
+nodo_repeat_1044046089 [label="REPEAT"]
+nodo_cond_716810866 [label=">="]
+nodo_repeat_1044046089 -- nodo_cond_716810866
+nodo_var_2038613377 [label="Var: a"]
+nodo_cond_716810866 -- nodo_var_2038613377
+nodo_cte_i_719807418 [label="CTE_I: 12"]
+nodo_cond_716810866 -- nodo_cte_i_719807418
+nodo_programa -- nodo_repeat_1044046089
+nodo_var_607204713 [label="Var: a"]
+nodo_asig_1128066374 -- nodo_var_607204713
+
+nodo_expbin_1274036899 [label="-"]
+nodo_asig_1128066374 -- nodo_expbin_1274036899
+nodo_var_1520112340 [label="Var: a"]
+nodo_expbin_1274036899 -- nodo_var_1520112340
+nodo_cte_i_2120847900 [label="CTE_I: 1"]
+nodo_expbin_1274036899 -- nodo_cte_i_2120847900
+nodo_asig_1128066374 [label="="]
+nodo_repeat_1044046089 -- nodo_asig_1128066374
+nodo_var_443731783 [label="Var: a"]
+nodo_show_1407085253 -- nodo_var_443731783
+nodo_show_1407085253 [label="SHOW"]
+nodo_repeat_1044046089 -- nodo_show_1407085253
+nodo_var_716630814 [label="Var: a"]
+nodo_show_419259247 -- nodo_var_716630814
+nodo_show_419259247 [label="SHOW"]
+nodo_programa -- nodo_show_419259247
+nodo_var_102423100 [label="Var: msg"]
+nodo_show_169751759 -- nodo_var_102423100
+nodo_show_169751759 [label="SHOW"]
+nodo_programa -- nodo_show_169751759
 }
