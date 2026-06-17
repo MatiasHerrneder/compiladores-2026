@@ -33,9 +33,9 @@ show z
 
 // Bucle REPEAT ... UNTIL
 REPEAT
-  a = a - 1
+  a = a + 1
   show a
-UNTIL a < 12
+UNTIL a > 12
 
 show a
 

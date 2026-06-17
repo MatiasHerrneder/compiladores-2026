@@ -26,6 +26,7 @@ STACK 200h		; Bytes en el Stack
   _comparador 	dd 	?
   _contador   	dd 	?
   _0          	dd 	0.0
+  _line_break 	db 	13, 10, '$'	; Constante fija para saltos de linea
   @aux1 	dd 	?
   @aux2 	dd 	?
   @aux3 	dd 	?
@@ -77,6 +78,9 @@ START:
 ; --- BLOQUE THEN ---
 ; --- SENTENCIA SHOW (IMPRESION) ---
   mov dx, OFFSET _a_y_b_son_iguales	; Carga la direccion real de la cadena
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
   mov ah, 9			; Funcion de DOS para imprimir string
   int 21h			; Interrupcion de sistema
 
@@ -185,6 +189,9 @@ Etiq_Else_12:
 ; =================================================
 
   DisplayFloat _contador, 2	; Invoca macro de impresion para numeros
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
 
 Etiq_Final_2:
 ; --- FIN DEL BLOQUE IF ---
@@ -218,24 +225,33 @@ Etiq_Falso_And_18:
   mov dx, OFFSET _condicion_compuesta_verdadera	; Carga la direccion real de la cadena
   mov ah, 9			; Funcion de DOS para imprimir string
   int 21h			; Interrupcion de sistema
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
 
 Etiq_Else_16:
 ; --- FIN DEL BLOQUE IF ---
 
 ; --- SENTENCIA SHOW (IMPRESION) ---
   DisplayFloat _z, 2	; Invoca macro de impresion para numeros
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
 
 ; --- INICIO DE UN BUCLE REPEAT ---
 Etiq_Inicio_Repeat_19:
   fld _a		; Carga operando izquierdo a ST(0)
   fld _1		; Carga operando derecho a ST(0), desplazando el anterior
-  fsub			; Resta ST(1) - ST(0) y hace pop
+  fadd			; Suma ST(1) + ST(0) y hace pop
   fstp @aux20		; Descarga el resultado en el temporal
 
   fld @aux20		; Carga el resultado final de la expresion
   fstp _a		; Asigna sacando el valor de la FPU
 ; --- SENTENCIA SHOW (IMPRESION) ---
   DisplayFloat _a, 2	; Invoca macro de impresion para numeros
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
 
 ; --- EVALUACION DE CONDICION UNTIL ---
   fld _a		; Carga operando izquierdo
@@ -246,14 +262,20 @@ Etiq_Inicio_Repeat_19:
   sahf			; Mueve los bits de AX a FLAGS de CPU
   ffree ST(0)		; Libera espacio FPU
   ffree ST(1)		; Libera espacio FPU
-  jae Etiq_Inicio_Repeat_19
+  jbe Etiq_Inicio_Repeat_19
 ; --- FIN DEL BUCLE REPEAT ---
 
 ; --- SENTENCIA SHOW (IMPRESION) ---
   DisplayFloat _a, 2	; Invoca macro de impresion para numeros
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
 
 ; --- SENTENCIA SHOW (IMPRESION) ---
   mov dx, OFFSET _hola_mundo	; Carga la direccion real de la cadena
+  mov ah, 9			; Funcion de DOS para imprimir string
+  int 21h			; Interrupcion de sistema
+  mov dx, OFFSET _line_break	; Carga el salto de linea (CRLF)
   mov ah, 9			; Funcion de DOS para imprimir string
   int 21h			; Interrupcion de sistema
 

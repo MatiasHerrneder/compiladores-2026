@@ -36,9 +36,16 @@ public class NodoShow extends NodoSentencia {
             pw.println("  mov dx, OFFSET " + idValor + "\t; Carga la direccion real de la cadena");
             pw.println("  mov ah, 9\t\t\t; Funcion de DOS para imprimir string");
             pw.println("  int 21h\t\t\t; Interrupcion de sistema");
+
+            pw.println("  mov dx, OFFSET _line_break\t; Carga el salto de linea (CRLF)");
+            pw.println("  mov ah, 9\t\t\t; Funcion de DOS para imprimir string");
+            pw.println("  int 21h\t\t\t; Interrupcion de sistema");
         } else {
             // Para reales/enteros mapeados en la FPU, tus apuntes muestran el uso de la macro DisplayFloat
             pw.println("  DisplayFloat " + idValor + ", 2\t; Invoca macro de impresion para numeros");
+            pw.println("  mov dx, OFFSET _line_break\t; Carga el salto de linea (CRLF)");
+            pw.println("  mov ah, 9\t\t\t; Funcion de DOS para imprimir string");
+            pw.println("  int 21h\t\t\t; Interrupcion de sistema");
         }
         pw.println();
     }

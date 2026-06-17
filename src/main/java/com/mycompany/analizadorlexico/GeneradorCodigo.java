@@ -109,6 +109,9 @@ public class GeneradorCodigo {
             // Constantes de control por defecto para la lógica interna
             if (!idsDeclarados.contains("_0")) pw.println("  _0          \tdd \t0.0");
             if (!idsDeclarados.contains("_1")) pw.println("  _1          \tdd \t1.0");
+
+            // Declarar la constante de salto de línea
+            pw.println("  _line_break \tdb \t13, 10, '$'\t; Constante fija para saltos de linea");
             // D. Declarar exactamente la cantidad de auxiliares calculados en el recorrido
             for (int i = 1; i <= this.contadorAuxiliares; i++) {
                 pw.println("  @aux" + i + " \tdd \t?");
