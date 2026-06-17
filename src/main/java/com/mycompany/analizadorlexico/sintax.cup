@@ -25,6 +25,7 @@ parser code {:
         if (var.equals("STRING")) return exp.equals("STRING");
         if (var.equals("INT"))    return exp.equals("INT");
         if (var.equals("FLOAT"))  return exp.equals("FLOAT") || exp.equals("INT");
+        if (var.equals("HEX"))    return exp.equals("HEX") || exp.equals("INT");
         return false;
     }
 
@@ -46,7 +47,7 @@ terminal REPEAT, UNTIL;
 terminal IF, THEN, ELSE, ENDIF;
 terminal DECVAR, ENDDECVAR;
 terminal PROGRAM_SECTION, END_PROGRAM_SECTION;
-terminal TYPE_INT, TYPE_FLOAT, TYPE_STRING;
+terminal TYPE_INT, TYPE_FLOAT, TYPE_STRING, TYPE_HEX;
 terminal SHOW;
 terminal EQ, NEQ, LE, GE, LT, GT;
 terminal AND, OR, NOT;
@@ -167,6 +168,7 @@ tipo ::=
       TYPE_INT   {: System.out.println("Regla tipo: INT");    RESULT = "INT";    :}
     | TYPE_FLOAT {: System.out.println("Regla tipo: FLOAT");  RESULT = "FLOAT";  :}
     | TYPE_STRING{: System.out.println("Regla tipo: STRING"); RESULT = "STRING"; :}
+    | TYPE_HEX   {: System.out.println("Regla tipo: HEX");    RESULT = "HEX";    :}
     ;
 
 lista_ids ::=
@@ -275,6 +277,13 @@ escritura_sin_var ::=
       {:
           System.out.println("Regla escritura_sin_var: SHOW FLOAT_CONST");
           RESULT = new NodoShow(new NodoConstanteFloat(Float.parseFloat(v.toString())));
+      :}
+    | SHOW HEX_CONST:v
+      {:
+          System.out.println("Regla escritura_sin_var: SHOW HEX_CONST");
+          String hex = v.toString().substring(2); // saca el "0h"
+          int decimal = Integer.parseInt(hex, 16);
+          RESULT = new NodoShow(new NodoConstanteHex(hex, decimal));
       :}
     ;
 

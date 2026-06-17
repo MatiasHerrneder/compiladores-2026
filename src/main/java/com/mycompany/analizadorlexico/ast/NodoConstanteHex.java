@@ -24,7 +24,8 @@ public class NodoConstanteHex extends NodoExpresion {
     @Override
     public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
         // Las constantes se mapean en la Tabla de Símbolos con prefijo
-        return "_" + this.valorDecimal; // Ejemplo: devuelve "_20"
+        String hexPuro = this.valorHex.toLowerCase().replace("0h", "").trim();
+        return "_" + hexPuro; // Ejemplo: devuelve "_20"
     }
 
     @Override

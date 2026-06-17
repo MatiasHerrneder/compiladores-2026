@@ -4,6 +4,7 @@ PROGRAM.SECTION
 DECVAR
   INT a, b, c
   FLOAT x
+  HEX z
   STRING msg
 ENDDECVAR
 
@@ -12,6 +13,7 @@ a = 10
 b = 20
 c = 123
 x = 3.14
+z = 0hFF
 msg = "Hola mundo"
 
 // Caso: comparación simple y llamada a la función especial
@@ -26,6 +28,9 @@ ENDIF
 IF  (!(a == b) && (x > 2.0)) THEN
   show "Condición compuesta verdadera"
 ENDIF
+
+show z
+show a+b
 
 // Bucle REPEAT ... UNTIL
 REPEAT
