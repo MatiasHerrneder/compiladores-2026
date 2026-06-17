@@ -33,6 +33,10 @@ REPEAT
   show a
 UNTIL a >= 12
 
+if (a == 12) THEN
+  show "a es 12"
+ENDIF
+
 // Mostrar mensaje final
 show msg
 

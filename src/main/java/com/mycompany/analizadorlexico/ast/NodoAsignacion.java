@@ -30,9 +30,18 @@ public class NodoAsignacion extends NodoSentencia {
     public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
         try {
             if ("STRING".equals(expresion.getTipoSemantico())) {
-                asm.append("; TODO asignacion STRING no soportada todavia: ")
-                   .append(variable.getNombre())
-                   .append("\n");
+                String origen = expresion.generarAssembler(asm, contexto);
+                String etiquetaCopiar = contexto.nuevaEtiqueta();
+
+                asm.append("LEA SI, ").append(origen).append("\n");
+                asm.append("LEA DI, ").append(variable.getNombre()).append("\n");
+                asm.append(etiquetaCopiar).append(":\n");
+                asm.append("MOV AL, [SI]\n");
+                asm.append("MOV [DI], AL\n");
+                asm.append("INC SI\n");
+                asm.append("INC DI\n");
+                asm.append("CMP AL, '$'\n");
+                asm.append("JNE ").append(etiquetaCopiar).append("\n");
                 return;
             }
 

@@ -31,7 +31,19 @@ public class NodoRepeat extends NodoSentencia {
 
     @Override
     public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
-        asm.append("; TODO assembler para REPEAT aun no implementado\n");
+        try {
+            String etiquetaInicio = contexto.nuevaEtiqueta();
+            String etiquetaFin = contexto.nuevaEtiqueta();
+
+            asm.append(etiquetaInicio).append(":\n");
+            for (NodoSentencia sentencia : sentencias) {
+                sentencia.generarAssembler(asm, contexto);
+            }
+            condicion.generarSaltos(asm, contexto, etiquetaFin, etiquetaInicio);
+            asm.append(etiquetaFin).append(":\n");
+        } catch (UnsupportedOperationException ex) {
+            asm.append("; ").append(ex.getMessage()).append("\n");
+        }
     }
 }
 

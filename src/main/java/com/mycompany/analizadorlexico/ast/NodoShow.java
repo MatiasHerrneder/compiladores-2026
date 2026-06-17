@@ -23,15 +23,27 @@ public class NodoShow extends NodoSentencia {
     @Override
     public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
         try {
-            if (!"STRING".equals(expresion.getTipoSemantico())) {
-                asm.append("; TODO SHOW solo soporta STRING en esta primera version\n");
+            String tipo = expresion.getTipoSemantico();
+            String nombre = expresion.generarAssembler(asm, contexto);
+
+            if ("STRING".equals(tipo)) {
+                asm.append("displayString ").append(nombre).append("\n");
                 return;
             }
 
-            String nombre = expresion.generarAssembler(asm, contexto);
-            asm.append("MOV DX, OFFSET ").append(nombre).append("\n");
-            asm.append("MOV AH, 9\n");
-            asm.append("INT 21h\n");
+            if ("INT".equals(tipo)) {
+                asm.append("FLD ").append(nombre).append("\n");
+                asm.append("FISTP DWORD PTR _show_int_value\n");
+                asm.append("DisplayInteger _show_int_value\n");
+                return;
+            }
+
+            if ("FLOAT".equals(tipo)) {
+                asm.append("DisplayFloat ").append(nombre).append(", 3\n");
+                return;
+            }
+
+            asm.append("; SHOW no soporta el tipo ").append(tipo).append("\n");
         } catch (UnsupportedOperationException ex) {
             asm.append("; ").append(ex.getMessage()).append("\n");
         }

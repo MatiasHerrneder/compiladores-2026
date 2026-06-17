@@ -59,21 +59,28 @@ public class NodoPrograma extends Nodo {
         }
 
         StringBuilder asm = new StringBuilder();
+        asm.append("include macros2.asm\n");
+        asm.append("include number.asm\n\n");
         asm.append(".MODEL LARGE\n");
         asm.append(".386\n");
         asm.append(".STACK 200h\n\n");
         asm.append(".DATA\n\n");
+        asm.append("_show_int_value dd ?\n");
         asm.append(generaData(contexto));
         asm.append("\n.CODE\n\n");
+        asm.append("\n");
+        asm.append("\nMAIN PROC\n\n");
         asm.append("MOV AX,@DATA\n");
         asm.append("MOV DS,AX\n");
         asm.append("MOV ES,AX\n\n");
         asm.append(codigoAsm);
         asm.append("\nMOV AX,4C00h\n");
         asm.append("INT 21h\n\n");
-        asm.append("END\n");
+        asm.append("MAIN ENDP\n\n");
+        asm.append("END MAIN\n");
         return asm.toString();
     }
+
 
     private String generaData(GeneradorAssemblerContext contexto) {
         StringBuilder dataAsm = new StringBuilder();

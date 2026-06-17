@@ -55,6 +55,34 @@ public class NodoIf extends NodoSentencia {
 
     @Override
     public void generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
-        asm.append("; TODO assembler para IF aun no implementado\n");
+        try {
+            String etiquetaThen = contexto.nuevaEtiqueta();
+            String etiquetaFin = contexto.nuevaEtiqueta();
+
+            if (sentenciasElse == null || sentenciasElse.isEmpty()) {
+                condicion.generarSaltos(asm, contexto, etiquetaThen, etiquetaFin);
+                asm.append(etiquetaThen).append(":\n");
+                for (NodoSentencia sentencia : sentenciasThen) {
+                    sentencia.generarAssembler(asm, contexto);
+                }
+                asm.append(etiquetaFin).append(":\n");
+                return;
+            }
+
+            String etiquetaElse = contexto.nuevaEtiqueta();
+            condicion.generarSaltos(asm, contexto, etiquetaThen, etiquetaElse);
+            asm.append(etiquetaThen).append(":\n");
+            for (NodoSentencia sentencia : sentenciasThen) {
+                sentencia.generarAssembler(asm, contexto);
+            }
+            asm.append("JMP ").append(etiquetaFin).append("\n");
+            asm.append(etiquetaElse).append(":\n");
+            for (NodoSentencia sentencia : sentenciasElse) {
+                sentencia.generarAssembler(asm, contexto);
+            }
+            asm.append(etiquetaFin).append(":\n");
+        } catch (UnsupportedOperationException ex) {
+            asm.append("; ").append(ex.getMessage()).append("\n");
+        }
     }
 }

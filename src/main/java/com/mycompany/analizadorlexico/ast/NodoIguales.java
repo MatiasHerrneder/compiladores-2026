@@ -17,16 +17,10 @@ import java.util.ArrayList;
  */
 public class NodoIguales extends NodoExpresion {
 
-    /** Expresión pivot contra la que se comparan todos los elementos. */
     private final NodoExpresion pivot;
     private final NodoVariable comparador;
     private final NodoVariable contador;
 
-    /**
-     * Lista de listas de expresiones.
-     * Cada elemento de este List representa una lista [ ... ] del lenguaje.
-     * Una lista vacía se representa con una lista Java vacía (no null).
-     */
     private final ArrayList<ArrayList<NodoExpresion>> listas;
 
     public NodoIguales(NodoExpresion pivot, ArrayList<ArrayList<NodoExpresion>> listas) {
@@ -49,6 +43,47 @@ public class NodoIguales extends NodoExpresion {
 
     @Override
     public String getTipoSemantico() { return "INT"; }
+
+    @Override
+    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
+        String tipoPivot = pivot.getTipoSemantico();
+        if (tipoPivot == null) {
+            throw new UnsupportedOperationException(
+                "#Iguales no puede evaluarse sin tipo semantico para el pivote"
+            );
+        }
+
+        // El pivote se evalua una sola vez y se reutiliza para todas las comparaciones.
+        String nombrePivot = pivot.generarAssembler(asm, contexto);
+
+        // El contador vive en un temporal para que el resultado pueda usarse como expresion.
+        String temporalContador = contexto.nuevoTemporal("INT");
+        asm.append("FLDZ\n");
+        asm.append("FSTP ").append(temporalContador).append("\n");
+
+        for (ArrayList<NodoExpresion> lista : listas) {
+            for (NodoExpresion elemento : lista) {
+                validarComparacion(tipoPivot, elemento.getTipoSemantico());
+
+                String etiquetaIgual = contexto.nuevaEtiqueta();
+                String etiquetaFinComparacion = contexto.nuevaEtiqueta();
+
+                // Reutilizamos la misma logica de comparacion que ya usan IF y REPEAT.
+                NodoVariable refPivot = new NodoVariable(nombrePivot);
+                refPivot.setTipoSemantico(tipoPivot);
+                NodoCondicion comparacion = new NodoCondicion(refPivot, "==", elemento);
+
+                comparacion.generarSaltos(asm, contexto, etiquetaIgual, etiquetaFinComparacion);
+                asm.append(etiquetaIgual).append(":\n");
+                asm.append("FLD1\n");
+                asm.append("FADD ").append(temporalContador).append("\n");
+                asm.append("FSTP ").append(temporalContador).append("\n");
+                asm.append(etiquetaFinComparacion).append(":\n");
+            }
+        }
+
+        return temporalContador;
+    }
 
     @Override
     public String graficarConVariable (NodoVariable variable, String id) {
@@ -120,5 +155,34 @@ public class NodoIguales extends NodoExpresion {
         NodoVariable contador = new NodoVariable("contador");
         contador.setTipoSemantico("INT");
         return contador.graficar(idPadre);
+    }
+
+    private void validarComparacion(String tipoPivot, String tipoElemento) {
+        if (tipoElemento == null) {
+            throw new UnsupportedOperationException(
+                "#Iguales no puede comparar un elemento sin tipo semantico"
+            );
+        }
+
+        if ("STRING".equals(tipoPivot) || "STRING".equals(tipoElemento)) {
+            if (!"STRING".equals(tipoPivot) || !"STRING".equals(tipoElemento)) {
+                throw new UnsupportedOperationException(
+                    "#Iguales no puede mezclar STRING con tipos numericos"
+                );
+            }
+            return;
+        }
+
+        if (!"INT".equals(tipoPivot) && !"FLOAT".equals(tipoPivot)) {
+            throw new UnsupportedOperationException(
+                "#Iguales no soporta pivotes del tipo " + tipoPivot
+            );
+        }
+
+        if (!"INT".equals(tipoElemento) && !"FLOAT".equals(tipoElemento)) {
+            throw new UnsupportedOperationException(
+                "#Iguales no soporta elementos del tipo " + tipoElemento
+            );
+        }
     }
 }

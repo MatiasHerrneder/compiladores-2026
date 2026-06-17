@@ -1,12 +1,22 @@
 PROGRAM.SECTION
 
+/* Declaraciones de variables */
 DECVAR
-INT x
-FLOAT y1
+  INT a, b, c
+  FLOAT x
+  STRING msg
 ENDDECVAR
 
-x = 42
-y1 = .75
+// Inicializaciones / asignaciones
+a = 10
+b = 15
+x = 3.14
+msg = "Hola mundo"
+
+c = #Iguales(a, [b - 5, 5, 2, 3, 10])
+
+IF (c == 2) THEN
+  show #Iguales(a, [b - 3, 5, 2, 3, 10])
+ENDIF
 
 ENDPROGRAM.SECTION
-

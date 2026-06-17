@@ -1,6 +1,18 @@
 |                             NOMBRE|     TOKEN|      TIPO|                              VALOR| LEN|
 ----------------------------------------------------------------------------------------------------
-|                                  x|        ID|       INT|                                  -|    |
-|                                 y1|        ID|     FLOAT|                                  -|    |
-|                                _42| INT_CONST|          |                                 42|    |
-|                               _.75|FLOAT_CONST|          |                                .75|    |
+|                                  a|        ID|       INT|                                  -|    |
+|                                  b|        ID|       INT|                                  -|    |
+|                                  c|        ID|       INT|                                  -|    |
+|                                  x|        ID|     FLOAT|                                  -|    |
+|                                msg|        ID|    STRING|                                  -|    |
+|                                _10| INT_CONST|          |                                 10|    |
+|                                _15| INT_CONST|          |                                 15|    |
+|                              _3.14|FLOAT_CONST|          |                               3.14|    |
+|                      _"Hola mundo"|STRING_CONST|          |                       "Hola mundo"|  12|
+|                                 _5| INT_CONST|          |                                  5|    |
+|                                 _2| INT_CONST|          |                                  2|    |
+|                                 _3| INT_CONST|          |                                  3|    |
+|                             _aux_1|   ASM_AUX|       INT|                                   |    |
+|                             _aux_2|   ASM_AUX|       INT|                                   |    |
+|                             _aux_3|   ASM_AUX|       INT|                                   |    |
+|                             _aux_4|   ASM_AUX|       INT|                                   |    |
