@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoConstanteHex extends NodoExpresion {
     private final String valorHex;   // ej: "F3A"
     private final int valorDecimal;  // ej: 3898
@@ -16,6 +20,12 @@ public class NodoConstanteHex extends NodoExpresion {
 
     @Override
     public String getTipoSemantico() { return "INT"; }
+
+    @Override
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Las constantes se mapean en la Tabla de Símbolos con prefijo
+        return "_" + this.valorDecimal; // Ejemplo: devuelve "_20"
+    }
 
     @Override
     protected String graficar(String idPadre) {

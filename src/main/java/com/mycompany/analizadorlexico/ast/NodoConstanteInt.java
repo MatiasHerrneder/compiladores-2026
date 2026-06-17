@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoConstanteInt extends NodoExpresion {
     private final int valor;
 
@@ -12,6 +16,12 @@ public class NodoConstanteInt extends NodoExpresion {
 
     @Override
     public String getTipoSemantico() { return "INT"; }
+
+    @Override
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Las constantes se mapean en la Tabla de Símbolos con prefijo
+        return "_" + this.valor; // Ejemplo: devuelve "_20"
+    }
 
     @Override
     protected String graficar(String idPadre) {

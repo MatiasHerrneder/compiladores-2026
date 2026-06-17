@@ -395,7 +395,12 @@ class CUP$parser$actions {
 		ArrayList<NodoSentencia> s = (ArrayList<NodoSentencia>)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		
           System.out.println("Regla program");
-          RESULT = new NodoPrograma(s);
+          NodoPrograma progresoAST = new NodoPrograma(s);
+          
+          GeneradorCodigo generador = new GeneradorCodigo(progresoAST, scanner.symtbl);
+          generador.generar("final.asm");
+          
+          RESULT = progresoAST;
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -411,7 +416,12 @@ class CUP$parser$actions {
 		
           ArrayList<NodoSentencia> l = new ArrayList<>();
           l.add(e);
-          RESULT = new NodoPrograma(l);
+          NodoPrograma progresoAST = new NodoPrograma(l);
+          
+          GeneradorCodigo generador = new GeneradorCodigo(progresoAST, scanner.symtbl);
+          generador.generar("final.asm");
+          
+          RESULT = progresoAST;
       
               CUP$parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

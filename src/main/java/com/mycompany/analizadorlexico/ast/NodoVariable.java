@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoVariable extends NodoExpresion {
     private final String nombre;
     private String tipoSemantico;
@@ -15,6 +19,12 @@ public class NodoVariable extends NodoExpresion {
 
     @Override
     public String getTipoSemantico() { return tipoSemantico; }
+
+    @Override
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Retorna el ID con el prefijo/sufijo para evitar conflictos en Assembler
+        return "_" + this.nombre; // Ejemplo: devuelve "_a" [cite: 125]
+    }
 
     @Override
     protected String graficar(String idPadre) {

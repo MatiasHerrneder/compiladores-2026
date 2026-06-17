@@ -106,13 +106,23 @@ program ::=
       PROGRAM_SECTION declaraciones:d sentencias:s END_PROGRAM_SECTION
       {:
           System.out.println("Regla program");
-          RESULT = new NodoPrograma(s);
+          NodoPrograma progresoAST = new NodoPrograma(s);
+          
+          GeneradorCodigo generador = new GeneradorCodigo(progresoAST, scanner.symtbl);
+          generador.generar("final.asm");
+          
+          RESULT = progresoAST;
       :}
     | escritura_sin_var:e
       {:
           ArrayList<NodoSentencia> l = new ArrayList<>();
           l.add(e);
-          RESULT = new NodoPrograma(l);
+          NodoPrograma progresoAST = new NodoPrograma(l);
+          
+          GeneradorCodigo generador = new GeneradorCodigo(progresoAST, scanner.symtbl);
+          generador.generar("final.asm");
+          
+          RESULT = progresoAST;
       :}
     ;
 

@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoExpresionBinaria extends NodoExpresion {
     private final NodoExpresion izquierda;
     private final String operador;
@@ -19,6 +23,42 @@ public class NodoExpresionBinaria extends NodoExpresion {
         if (ti == null || td == null) return null;
         if (ti.equals("FLOAT") || td.equals("FLOAT")) return "FLOAT";
         return "INT";
+    }
+
+    @Override
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // 1. Post-orden recursivo: Resolvemos primero los hijos de abajo 
+        String idIzq = this.izquierda.generarASM(pw, gc);
+        String idDer = this.derecha.generarASM(pw, gc);
+        
+        // 2. Solicitamos un nuevo nombre de variable auxiliar (ej: @aux1) 
+        String aux = gc.nuevoAuxiliar();
+        
+        // 3. Volcamos las instrucciones usando las reglas del Coprocesador Matemático
+        pw.println("  fld " + idIzq + "\t\t; Carga operando izquierdo a ST(0)");
+        pw.println("  fld " + idDer + "\t\t; Carga operando derecho a ST(0), desplazando el anterior");
+        
+        switch(this.operador) {
+            case "+":
+                pw.println("  fadd\t\t\t; Suma ST(1) + ST(0) y hace pop");
+                break;
+            case "-":
+                pw.println("  fsub\t\t\t; Resta ST(1) - ST(0) y hace pop");
+                break;
+            case "*":
+                pw.println("  fmul\t\t\t; Multiplica ST(1) * ST(0) y hace pop");
+                break;
+            case "/":
+                pw.println("  fdiv\t\t\t; Divide ST(1) / ST(0) y hace pop");
+                break;
+        }
+        
+        // 4. Sacamos el resultado de la pila de la FPU y lo guardamos en la variable auxiliar
+        pw.println("  fstp " + aux + "\t\t; Descarga el resultado en el temporal");
+        pw.println();
+
+        // 5. Devolvemos el nombre del auxiliar para que el nodo padre sepa de dónde leer este resultado
+        return aux; 
     }
 
     @Override

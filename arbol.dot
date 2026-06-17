@@ -1,60 +1,126 @@
 graph G {nodo_programa [label="Programa"]
-nodo_var_1205453502 [label="Var: a"]
-nodo_asig_1173750329 -- nodo_var_1205453502
+nodo_var_957005536 [label="Var: a"]
+nodo_asig_1708138677 -- nodo_var_957005536
 
-nodo_cte_i_999363463 [label="CTE_I: 10"]
-nodo_asig_1173750329 -- nodo_cte_i_999363463
-nodo_asig_1173750329 [label="="]
-nodo_programa -- nodo_asig_1173750329
-nodo_var_927366868 [label="Var: b"]
-nodo_asig_1112824685 -- nodo_var_927366868
+nodo_cte_i_576489890 [label="CTE_I: 10"]
+nodo_asig_1708138677 -- nodo_cte_i_576489890
+nodo_asig_1708138677 [label="="]
+nodo_programa -- nodo_asig_1708138677
+nodo_var_853064386 [label="Var: b"]
+nodo_asig_1458171170 -- nodo_var_853064386
 
-nodo_cte_i_1048811184 [label="CTE_I: 20"]
-nodo_asig_1112824685 -- nodo_cte_i_1048811184
-nodo_asig_1112824685 [label="="]
-nodo_programa -- nodo_asig_1112824685
-nodo_var_1842481701 [label="Var: c"]
-nodo_asig_230533068 -- nodo_var_1842481701
+nodo_cte_i_1590292423 [label="CTE_I: 20"]
+nodo_asig_1458171170 -- nodo_cte_i_1590292423
+nodo_asig_1458171170 [label="="]
+nodo_programa -- nodo_asig_1458171170
+nodo_var_25625337 [label="Var: e"]
+nodo_asig_404646949 -- nodo_var_25625337
 
-nodo_cte_i_1776707989 [label="CTE_I: 123"]
-nodo_asig_230533068 -- nodo_cte_i_1776707989
-nodo_asig_230533068 [label="="]
-nodo_programa -- nodo_asig_230533068
-nodo_var_730929514 [label="Var: x"]
-nodo_asig_1265783823 -- nodo_var_730929514
+nodo_cte_i_1996404385 [label="CTE_I: 123"]
+nodo_asig_404646949 -- nodo_cte_i_1996404385
+nodo_asig_404646949 [label="="]
+nodo_programa -- nodo_asig_404646949
+nodo_var_206368740 [label="Var: x"]
+nodo_asig_1733871726 -- nodo_var_206368740
 
-nodo_cte_f_1458552095 [label="CTE_F: 3.14"]
-nodo_asig_1265783823 -- nodo_cte_f_1458552095
-nodo_asig_1265783823 [label="="]
-nodo_programa -- nodo_asig_1265783823
-nodo_var_313581113 [label="Var: msg"]
-nodo_asig_1142345965 -- nodo_var_313581113
+nodo_cte_i_895853662 [label="CTE_I: 3"]
+nodo_asig_1733871726 -- nodo_cte_i_895853662
+nodo_asig_1733871726 [label="="]
+nodo_programa -- nodo_asig_1733871726
+nodo_var_387445502 [label="Var: f"]
+nodo_asig_908941293 -- nodo_var_387445502
 
-nodo_cte_str_2051222887 [label="CTE_STR: 'Hola mundo'"]
-nodo_asig_1142345965 -- nodo_cte_str_2051222887
-nodo_asig_1142345965 [label="="]
-nodo_programa -- nodo_asig_1142345965
-nodo_repeat_774577936 [label="REPEAT"]
-nodo_cond_1548235648 [label="<"]
-nodo_repeat_774577936 -- nodo_cond_1548235648
-nodo_var_1209892646 [label="Var: a"]
-nodo_cond_1548235648 -- nodo_var_1209892646
-nodo_cte_i_735468375 [label="CTE_I: 12"]
-nodo_cond_1548235648 -- nodo_cte_i_735468375
-nodo_programa -- nodo_repeat_774577936
-nodo_var_1077608127 [label="Var: a"]
-nodo_asig_1567822498 -- nodo_var_1077608127
+nodo_cte_i_2093943863 [label="CTE_I: 5"]
+nodo_asig_908941293 -- nodo_cte_i_2093943863
+nodo_asig_908941293 [label="="]
+nodo_programa -- nodo_asig_908941293
+nodo_var_276177939 [label="Var: comparador"]
+nodo_asig_945730020 -- nodo_var_276177939
 
-nodo_expbin_1677544913 [label="+"]
-nodo_asig_1567822498 -- nodo_expbin_1677544913
-nodo_var_2053684762 [label="Var: a"]
-nodo_expbin_1677544913 -- nodo_var_2053684762
-nodo_cte_i_1061901815 [label="CTE_I: 1"]
-nodo_expbin_1677544913 -- nodo_cte_i_1061901815
-nodo_asig_1567822498 [label="="]
-nodo_repeat_774577936 -- nodo_asig_1567822498
-nodo_var_554289313 [label="Var: a"]
-nodo_show_680758183 -- nodo_var_554289313
-nodo_show_680758183 [label="SHOW"]
-nodo_repeat_774577936 -- nodo_show_680758183
+nodo_expbin_341589150 [label="/"]
+nodo_asig_945730020 -- nodo_expbin_341589150
+nodo_expbin_1890425745 [label="+"]
+nodo_expbin_341589150 -- nodo_expbin_1890425745
+nodo_var_1026672113 [label="Var: a"]
+nodo_expbin_1890425745 -- nodo_var_1026672113
+nodo_var_482752760 [label="Var: w"]
+nodo_expbin_1890425745 -- nodo_var_482752760
+nodo_var_1762348850 [label="Var: b"]
+nodo_expbin_341589150 -- nodo_var_1762348850
+nodo_asig_945730020 [label="="]
+nodo_programa -- nodo_asig_945730020
+nodo_var_1187736977 [label="Var: contador"]
+nodo_asig_1978015889 -- nodo_var_1187736977
+
+nodo_cte_i_1810336840 [label="CTE_I: 0"]
+nodo_asig_1978015889 -- nodo_cte_i_1810336840
+nodo_asig_1978015889 [label="="]
+nodo_programa -- nodo_asig_1978015889
+nodo_1487289561 [label="IF"]
+nodo_programa -- nodo_1487289561
+nodo_cond_478178804 [label="=="]
+nodo_1487289561 -- nodo_cond_478178804
+nodo_var_28978192 [label="Var: comparador"]
+nodo_cond_478178804 -- nodo_var_28978192
+nodo_var_1458075043 [label="Var: x"]
+nodo_cond_478178804 -- nodo_var_1458075043
+nodo_1061276499 [label="Then"]
+nodo_1487289561 -- nodo_1061276499
+nodo_var_1882954792 [label="Var: contador"]
+nodo_asig_548535938 -- nodo_var_1882954792
+
+nodo_expbin_1701554913 [label="+"]
+nodo_asig_548535938 -- nodo_expbin_1701554913
+nodo_var_1421999692 [label="Var: contador"]
+nodo_expbin_1701554913 -- nodo_var_1421999692
+nodo_cte_i_2074828728 [label="CTE_I: 1"]
+nodo_expbin_1701554913 -- nodo_cte_i_2074828728
+nodo_asig_548535938 [label="="]
+nodo_1061276499 -- nodo_asig_548535938
+nodo_1465734713 [label="IF"]
+nodo_programa -- nodo_1465734713
+nodo_cond_1876542097 [label="=="]
+nodo_1465734713 -- nodo_cond_1876542097
+nodo_var_884044472 [label="Var: comparador"]
+nodo_cond_1876542097 -- nodo_var_884044472
+nodo_var_365341961 [label="Var: e"]
+nodo_cond_1876542097 -- nodo_var_365341961
+nodo_681037078 [label="Then"]
+nodo_1465734713 -- nodo_681037078
+nodo_var_912316666 [label="Var: contador"]
+nodo_asig_159076319 -- nodo_var_912316666
+
+nodo_expbin_376346074 [label="+"]
+nodo_asig_159076319 -- nodo_expbin_376346074
+nodo_var_460156 [label="Var: contador"]
+nodo_expbin_376346074 -- nodo_var_460156
+nodo_cte_i_1406252820 [label="CTE_I: 1"]
+nodo_expbin_376346074 -- nodo_cte_i_1406252820
+nodo_asig_159076319 [label="="]
+nodo_681037078 -- nodo_asig_159076319
+nodo_1665532572 [label="IF"]
+nodo_programa -- nodo_1665532572
+nodo_cond_23370603 [label="=="]
+nodo_1665532572 -- nodo_cond_23370603
+nodo_var_963662558 [label="Var: comparador"]
+nodo_cond_23370603 -- nodo_var_963662558
+nodo_var_1732717555 [label="Var: f"]
+nodo_cond_23370603 -- nodo_var_1732717555
+nodo_885430117 [label="Then"]
+nodo_1665532572 -- nodo_885430117
+nodo_var_704752386 [label="Var: contador"]
+nodo_asig_291306837 -- nodo_var_704752386
+
+nodo_expbin_1950811394 [label="+"]
+nodo_asig_291306837 -- nodo_expbin_1950811394
+nodo_var_1958398288 [label="Var: contador"]
+nodo_expbin_1950811394 -- nodo_var_1958398288
+nodo_cte_i_41563335 [label="CTE_I: 1"]
+nodo_expbin_1950811394 -- nodo_cte_i_41563335
+nodo_asig_291306837 [label="="]
+nodo_885430117 -- nodo_asig_291306837
+nodo_var_621069873 [label="Var: contador"]
+nodo_show_1687158948 -- nodo_var_621069873
+nodo_show_1687158948 [label="SHOW"]
+nodo_programa -- nodo_show_1687158948
 }

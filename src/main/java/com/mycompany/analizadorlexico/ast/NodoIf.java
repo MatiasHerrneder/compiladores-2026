@@ -2,6 +2,8 @@ package com.mycompany.analizadorlexico.ast;
 
 import java.util.List;
 
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoIf extends NodoSentencia {
     private final NodoCondicion condicion;
     private final List<NodoSentencia> sentenciasThen;
@@ -14,6 +16,50 @@ public class NodoIf extends NodoSentencia {
         this.condicion = condicion;
         this.sentenciasThen = sentenciasThen;
         this.sentenciasElse = sentenciasElse;
+    }
+
+    @Override
+    public void generarASM(java.io.PrintWriter pw, GeneradorCodigo gc) {
+        // 1. Generamos nombres de etiquetas unicas para controlar el flujo
+        String etiquetaElse = gc.nuevoAuxiliar().replace("@aux", "Etiq_Else_");
+        String etiquetaFinal = gc.nuevoAuxiliar().replace("@aux", "Etiq_Final_");
+
+        pw.println("; --- INICIO DE UN BLOQUE IF ---");
+        
+        // 2. Procesamos la condicion. Asumimos que NodoCondicion genera los FCOM/SAHF 
+        // y nos retorna el salto que debemos dar si la condicion es FALSA.
+        // Ejemplo: Si la condicion es (a > b), el salto falso seria JNA[cite: 760].
+        String saltoFalso = this.condicion.generarSaltoFalso(pw, gc); 
+        
+        // Saltamos al bloque Else si la condicion no se cumple
+        pw.println("  " + saltoFalso + " " + etiquetaElse);
+        pw.println("; --- BLOQUE THEN ---");
+
+        // 3. Traducimos las sentencias del bloque THEN
+        for (NodoSentencia sentencia : this.sentenciasThen) {
+            sentencia.generarASM(pw, gc);
+        }
+
+        // Si entramos al THEN, al terminar debemos esquivar el ELSE con un salto incondicional [cite: 393]
+        if (this.sentenciasElse != null) {
+            pw.println("  jmp " + etiquetaFinal); // [cite: 393]
+        }
+
+        // 4. Estampamos el inicio del bloque ELSE
+        pw.println(etiquetaElse + ":");
+
+        // Traducimos las sentencias del bloque ELSE si es que existen
+        if (this.sentenciasElse != null) {
+            pw.println("; --- BLOQUE ELSE ---");
+            for (NodoSentencia sentencia : this.sentenciasElse) {
+                sentencia.generarASM(pw, gc);
+            }
+            // Estampamos el final definitivo para cuando salte el THEN
+            pw.println(etiquetaFinal + ":");
+        }
+        
+        pw.println("; --- FIN DEL BLOQUE IF ---");
+        pw.println();
     }
 
     @Override

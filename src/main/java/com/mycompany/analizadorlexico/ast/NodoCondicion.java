@@ -85,6 +85,45 @@ public class NodoCondicion extends Nodo {
         }
     }
 
+    public String generarSaltoFalso(java.io.PrintWriter pw, com.mycompany.analizadorlexico.GeneradorCodigo gc) {
+        // Caso de comparación simple: expr OP expr
+        if (this.izquierda != null && this.derecha != null) {
+            // 1. Resolvemos los subárboles de las expresiones izquierda y derecha
+            String idIzq = this.izquierda.generarASM(pw, gc);
+            String idDer = this.derecha.generarASM(pw, gc);
+
+            // 2. Cargamos y comparamos usando la FPU siguiendo las pautas de clase
+            pw.println("  fld " + idIzq + "\t\t; Carga operando izquierdo de la condicion");
+            pw.println("  fld " + idDer + "\t\t; Carga operando derecho de la condicion");
+            pw.println("  fxch\t\t\t; Intercambia para comparar ST(1) con ST(0)");
+            pw.println("  fcom\t\t\t; Compara los dos reales en la FPU");
+            pw.println("  fstsw ax\t\t; Copia los bits de estado de la FPU a AX");
+            pw.println("  sahf\t\t\t; Traslada los bits a FLAGS de la CPU");
+            pw.println("  ffree\t\t\t; Libera espacio de la pila FPU");
+
+            // 3. Mapeamos cuál es el salto que esquiva el bloque (SALTO POR FALSO)
+            switch (this.operador) {
+                case "==":
+                    return "jne"; // Si se pedía igual, salta si es Distinto
+                case "!=":
+                    return "je";  // Si se pedía distinto, salta si es Igual
+                case ">":
+                    return "jna"; // Si se pedía mayor, salta si es Menor o Igual (JNA/JBE)
+                case ">=":
+                    return "jnbe"; // Si se pedía mayor o igual, salta si es Menor (JB/JNAE)
+                case "<":
+                    return "jae"; // Si se pedía menor, salta si es Mayor o Igual (JAE/JNB)
+                case "<=":
+                    return "ja";  // Si se pedía menor o igual, salta si es Mayor (JA/JNBE)
+                default:
+                    return "jmp";
+            }
+        }
+        
+        // Espacio para lógica compuesta (AND/OR/NOT) si tu compilador lo requiere más adelante.
+        return "jmp";
+    }
+
     @Override
     protected String graficar(String idPadre) {
         final String miId = "nodo_cond_" + System.identityHashCode(this);
