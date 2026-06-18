@@ -2,6 +2,8 @@ package com.mycompany.analizadorlexico.ast;
 
 import java.util.List;
 
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoRepeat extends NodoSentencia {
     private final List<NodoSentencia> sentencias;
     private final NodoCondicion condicion;
@@ -10,6 +12,43 @@ public class NodoRepeat extends NodoSentencia {
         super("REPEAT");
         this.sentencias = sentencias;
         this.condicion = condicion;
+    }
+
+    @Override
+    public void generarASM(java.io.PrintWriter pw, GeneradorCodigo gc) {
+        // 1. Creamos una etiqueta unica para marcar el inicio del bucle REPEAT
+        String etiquetaInicio = gc.nuevoAuxiliar().replace("@aux", "Etiq_Inicio_Repeat_");
+
+        pw.println("; --- INICIO DE UN BUCLE REPEAT ---");
+        pw.println(etiquetaInicio + ":");
+
+        // 2. Traducimos recursivamente el cuerpo de sentencias del bucle
+        for (NodoSentencia s : this.sentencias) {
+            s.generarASM(pw, gc);
+        }
+
+        pw.println("; --- EVALUACION DE CONDICION UNTIL ---");
+        
+        // 3. Evaluamos la condicion. Generara los fld, fcom, fstsw ax, sahf.
+        // Y nos devuelve el salto condicional para cuando la condicion NO se cumple (FALSA).
+        String saltoFalso = this.condicion.generarSaltoFalso(pw, gc);
+
+        // 4. Si la condicion es falsa (UNTIL no alcanzado), saltamos de nuevo al inicio
+        pw.println("  " + saltoFalso + " " + etiquetaInicio);
+        pw.println("; --- FIN DEL BUCLE REPEAT ---");
+        pw.println();
+    }
+
+    public String invertirSaltoRepeat(String salto) {
+        switch (salto) {
+            case "je": return "jne";
+            case "jne": return "je";
+            case "jg": return "jle";
+            case "jge": return "jl";
+            case "jl": return "jge";
+            case "jle": return "jg";
+            default: return salto; // Para otros saltos, no hacemos inversión
+        }
     }
 
     @Override

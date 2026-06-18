@@ -4,6 +4,7 @@ PROGRAM.SECTION
 DECVAR
   INT a, b, c
   FLOAT x
+  HEX z
   STRING msg
 ENDDECVAR
 
@@ -12,6 +13,7 @@ a = 10
 b = 20
 c = 123
 x = 3.14
+z = 0hAE2
 msg = "Hola mundo"
 
 // Caso: comparación simple y llamada a la función especial
@@ -19,19 +21,23 @@ IF (a == b) THEN
   show "a y b son iguales"
 ELSE
   // #Iguales toma una expresión y una lista de ids entre corchetes
-  show #Iguales(a, [b, c])
+  show #Iguales(a, [a, a, 10, 5+5])
 ENDIF
 
 // Uso de negación lógica y operadores combinados
 IF  (!(a == b) && (x > 2.0)) THEN
-  show "Condición compuesta verdadera"
+  show "Condicion compuesta verdadera"
 ENDIF
+
+show z
 
 // Bucle REPEAT ... UNTIL
 REPEAT
   a = a + 1
   show a
-UNTIL a >= 12
+UNTIL a > 12
+
+show a
 
 if (a == 12) THEN
   show "a es 12"

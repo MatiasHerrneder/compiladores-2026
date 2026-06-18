@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoConstanteFloat extends NodoExpresion {
     private final float valor;
 
@@ -14,8 +18,9 @@ public class NodoConstanteFloat extends NodoExpresion {
     public String getTipoSemantico() { return "FLOAT"; }
 
     @Override
-    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
-        return contexto.nombreConstanteFloat(valor);
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Convierte el float a String y reemplaza el punto por un guion bajo (ej: _3_14)
+        return "_" + String.valueOf(this.valor).replace(".", "_");
     }
 
     @Override

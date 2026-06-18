@@ -4,15 +4,16 @@
 |                                  b|        ID|       INT|                                  -|    |
 |                                  c|        ID|       INT|                                  -|    |
 |                                  x|        ID|     FLOAT|                                  -|    |
+|                                  z|        ID|       HEX|                                  -|    |
 |                                msg|        ID|    STRING|                                  -|    |
 |                                _10| INT_CONST|          |                                 10|    |
 |                                _15| INT_CONST|          |                                 15|    |
 |                              _3.14|FLOAT_CONST|          |                               3.14|    |
+|                              0hAE2| HEX_CONST|          |                               2786|    |
 |                      _"Hola mundo"|STRING_CONST|          |                       "Hola mundo"|  12|
+|               _"a y b son iguales"|STRING_CONST|          |                "a y b son iguales"|  19|
 |                                 _5| INT_CONST|          |                                  5|    |
-|                                 _2| INT_CONST|          |                                  2|    |
-|                                 _3| INT_CONST|          |                                  3|    |
-|                             _aux_1|   ASM_AUX|       INT|                                   |    |
-|                             _aux_2|   ASM_AUX|       INT|                                   |    |
-|                             _aux_3|   ASM_AUX|       INT|                                   |    |
-|                             _aux_4|   ASM_AUX|       INT|                                   |    |
+|                               _2.0|FLOAT_CONST|          |                                2.0|    |
+|   _"Condicion compuesta verdadera"|STRING_CONST|          |    "Condicion compuesta verdadera"|  31|
+|                                 _1| INT_CONST|          |                                  1|    |
+|                                _12| INT_CONST|          |                                 12|    |

@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoConstanteString extends NodoExpresion {
     private final String valor;
 
@@ -19,8 +23,18 @@ public class NodoConstanteString extends NodoExpresion {
     public String getTipoSemantico() { return "STRING"; }
 
     @Override
-    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
-        return contexto.nombreConstanteString(valor);
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        String textoBase = this.valor.replace("\"", "").toLowerCase().trim();
+        
+        String idLimpio = "_" + textoBase.replaceAll("[áéíóúÁÉÍÓÚñÑ]", "n")
+                                        .replaceAll("[^a-z0-9_]", "_")
+                                        .replaceAll("_+", "_");
+        
+        if (idLimpio.endsWith("_") && idLimpio.length() > 1) {
+            idLimpio = idLimpio.substring(0, idLimpio.length() - 1);
+        }
+        
+        return idLimpio;
     }
 
     @Override

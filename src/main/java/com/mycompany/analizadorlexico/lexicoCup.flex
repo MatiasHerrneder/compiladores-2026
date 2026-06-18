@@ -51,6 +51,7 @@ TablaSimbolos symtbl = new TablaSimbolos("ts.txt");
 "INT"                { return new Symbol(sym.TYPE_INT, yyline, yycolumn, yytext()); }
 "FLOAT"              { return new Symbol(sym.TYPE_FLOAT, yyline, yycolumn, yytext()); }
 "STRING"             { return new Symbol(sym.TYPE_STRING, yyline, yycolumn, yytext()); }
+"HEX"                { return new Symbol(sym.TYPE_HEX, yyline, yycolumn, yytext());}
 "show"               { return new Symbol(sym.SHOW, yyline, yycolumn, yytext()); }
 
 // ---------- Operadores y símbolos ----------

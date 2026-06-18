@@ -1,5 +1,9 @@
 package com.mycompany.analizadorlexico.ast;
 
+import java.io.PrintWriter;
+
+import com.mycompany.analizadorlexico.GeneradorCodigo;
+
 public class NodoVariable extends NodoExpresion {
     private final String nombre;
     private String tipoSemantico;
@@ -7,6 +11,10 @@ public class NodoVariable extends NodoExpresion {
     public NodoVariable(String nombre) {
         super("VAR");
         this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setTipoSemantico(String tipo) {
@@ -21,8 +29,9 @@ public class NodoVariable extends NodoExpresion {
     public String getTipoSemantico() { return tipoSemantico; }
 
     @Override
-    public String generarAssembler(StringBuilder asm, GeneradorAssemblerContext contexto) {
-        return nombre;
+    public String generarASM(PrintWriter pw, GeneradorCodigo gc) {
+        // Asegura que devuelva el ID en minúsculas (ej: _msg, _a)
+        return "_" + this.nombre.toLowerCase();
     }
 
     @Override

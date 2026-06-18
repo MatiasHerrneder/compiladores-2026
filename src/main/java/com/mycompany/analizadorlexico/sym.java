@@ -8,47 +8,48 @@ package com.mycompany.analizadorlexico;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int SHOW = 15;
-  public static final int FUNC_IGUALES = 35;
-  public static final int MULT = 27;
-  public static final int GE = 19;
-  public static final int LPAREN = 32;
+  public static final int SHOW = 16;
+  public static final int FUNC_IGUALES = 36;
+  public static final int MULT = 28;
+  public static final int GE = 20;
+  public static final int LPAREN = 33;
   public static final int REPEAT = 2;
-  public static final int RPAREN = 33;
-  public static final int NOT = 24;
-  public static final int AND = 22;
-  public static final int LT = 20;
+  public static final int RPAREN = 34;
+  public static final int NOT = 25;
+  public static final int AND = 23;
+  public static final int LT = 21;
   public static final int ENDDECVAR = 9;
-  public static final int OR = 23;
-  public static final int DIV = 28;
+  public static final int OR = 24;
+  public static final int DIV = 29;
   public static final int UNTIL = 3;
-  public static final int FLOAT_CONST = 38;
+  public static final int FLOAT_CONST = 39;
   public static final int TYPE_INT = 12;
-  public static final int HEX_CONST = 40;
-  public static final int ASSIGN = 29;
+  public static final int HEX_CONST = 41;
+  public static final int TYPE_HEX = 15;
+  public static final int ASSIGN = 30;
   public static final int IF = 4;
-  public static final int ID = 36;
-  public static final int LE = 18;
+  public static final int ID = 37;
+  public static final int LE = 19;
   public static final int EOF = 0;
-  public static final int INT_CONST = 37;
+  public static final int INT_CONST = 38;
   public static final int error = 1;
-  public static final int COMA = 34;
-  public static final int MENOS = 26;
-  public static final int NEQ = 17;
+  public static final int COMA = 35;
+  public static final int MENOS = 27;
+  public static final int NEQ = 18;
   public static final int TYPE_FLOAT = 13;
-  public static final int EQ = 16;
-  public static final int LBRACK = 30;
+  public static final int EQ = 17;
+  public static final int LBRACK = 31;
   public static final int DECVAR = 8;
   public static final int END_PROGRAM_SECTION = 11;
   public static final int ENDIF = 7;
   public static final int ELSE = 6;
   public static final int TYPE_STRING = 14;
-  public static final int RBRACK = 31;
+  public static final int RBRACK = 32;
   public static final int THEN = 5;
   public static final int PROGRAM_SECTION = 10;
-  public static final int STRING_CONST = 39;
-  public static final int GT = 21;
-  public static final int MAS = 25;
+  public static final int STRING_CONST = 40;
+  public static final int GT = 22;
+  public static final int MAS = 26;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -65,6 +66,7 @@ public class sym {
   "TYPE_INT",
   "TYPE_FLOAT",
   "TYPE_STRING",
+  "TYPE_HEX",
   "SHOW",
   "EQ",
   "NEQ",
